@@ -396,3 +396,13 @@ and D-pad movement were observed (`regression-easy3.jpg`). Portal-run cleanup
 logs at that timestamp report 6,097 audio callbacks, 39 EOFs, zero decode/seek
 errors and completed launcher cleanup. This is bounded hardware coverage;
 reflective levels and long-duration transitions have not been requalified.
+
+### README gameplay media
+
+The README gameplay GIF was derived from physical Xbox capture
+`build/hardware/readme-gameplay/up-057852.ts`: normal Neverball Easy 1,
+with the portal-fix XBE and restored game data. The bounded 16-second recorder
+reported 362 video frames, zero video/audio drops, and restored codec 0.
+The published GIF is silent and reduced to 480 pixels wide at 12 fps; it
+illustrates gameplay rather than measuring performance. Title still uses
+`build/hardware/upstream-sync-title.jpg`, a prior physical Xbox title capture.
