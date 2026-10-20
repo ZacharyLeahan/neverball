@@ -25,13 +25,18 @@ Xbox **Exit** offers confirmed launcher return, game restart,
 console reboot and power off, with Cancel selected by default. See the
 [system-menu notes](doc/xbox-exit-menu.md) for configuration and test coverage.
 
+This Xbox continuation builds on JayFoxRox / Jannik Vogel's original NXDK
+port and the subsequent Xbox work in ZacharyLeahan/neverball-nxdk. The modern
+game retains upstream Neverball history, content and contributor credits, and
+uses Ryzee119's nxdk-gles11 renderer.
+
 ### Source and reference repositories
 
 * [This modern continuation](https://github.com/ZacharyLeahan/neverball).
 * [Original Neverball upstream](https://github.com/Neverball/neverball) and
   [Neverball contributors](doc/authors.txt): game, engine, levels and assets.
-* [Working older Xbox port](https://github.com/ZacharyLeahan/neverball-nxdk):
-  the separate hardware-tested platform reference and its existing releases.
+* Earlier `ZacharyLeahan/neverball-nxdk` continuation: the hardware-tested
+  Xbox platform reference, preserved in local repository/release backups.
 * [JayFoxRox / Jannik Vogel's original Xbox port](https://github.com/JayFoxRox/neverball/tree/xbox):
   original Xbox/NXDK port authorship and the foundation of the older continuation.
 * [Ryzee119/nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11): the direct
