@@ -502,3 +502,47 @@ reproduction details, hashes, comparisons and screenshots. Captures are under
 `build/hardware/64mib-extended/`; capped and uncapped error images are preserved
 in `doc/images/ram-validation/`. Stock-console support remains an expectation
 based on capped tests, not actual stock-hardware qualification.
+
+
+### Adventure command-buffer fix, 2026-10-20
+
+Tracked in [issue #10](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10).
+A temporary diagnostic added buffer bounds to pbkit's DMA failure screen:
+head `0x83da8000`, tail `0x83e28000`, hardware GET `0x03e2a088`,
+PUT `0x03e2a090`. The configured buffer spans 512 KiB; the GPU was reading
+`0x2088` bytes beyond its end. The renderer resets the buffer at presentation,
+but Adventure's commands overflowed it before that point. This identifies a
+command-buffer capacity failure, rather than a requirement for 128 MiB RAM.
+
+`xbox/platform.c` now requests 1 MiB through `pb_size` before `glContextInit`
+calls `pb_init`. The additional contiguous allocation is 512 KiB. The temporary
+SDK diagnostics were removed before building the tested candidate; no renderer
+revision, register programming, level geometry or runtime-cap changes.
+
+Tested XBE SHA-256:
+`c2f184f51e005b37e2c4017a08e30e88ab8826bf720dc37733c94d8a1d73caa7`.
+Header initialization flags `0x5` retain `Limit64Megabytes`. Deployed and
+read-back verified at `build/hardware/20261020T193323Z/` to the separate
+`/F/neverball-upstream` directory on the physical 128 MiB development console.
+The test menu references the unmodified stock `map-fwp/adventure.sol`.
+
+Adventure passed the previously crashing overview/introduction, started into
+gameplay, accepted D-pad movement, restarted successfully, and retried into
+gameplay after a normal fall-out. No GPU error occurred in these bounded tests.
+This was not a level-completion or exhaustive camera/path test. Existing
+`make test ENABLE_FETCH=0 ENABLE_NLS=0`, Xbox exit checks and diff checks pass.
+
+| Before: default command-buffer overflow | After: Adventure gameplay, cap enabled |
+| --- | --- |
+| ![DMA failure with buffer bounds](images/adventure/before-command-overflow.jpg) | ![Adventure gameplay under the 64 MiB cap](images/adventure/after-gameplay.jpg) |
+
+The 1 MiB buffer is validated for these scenes, not a proof that every possible
+frame in every level fits. Stock 64 MiB hardware remains untested.
+
+Final log collection: `build/hardware/20261020T193822Z/`. Minimum sampled
+available memory was 5,539 pages (**21.637 MiB**) with the cap enabled. Audio
+reported zero decode and seek errors; this is log evidence, not a listening
+quality assessment. Cleanup completed and Return to launcher restored XBMC
+without a physical reboot. Restored normal `sets.txt`, deleted the temporary
+Adventure menu, and read-back verified the normal installation at
+`build/hardware/20261020T193836Z/`. Protected known-good installation untouched.

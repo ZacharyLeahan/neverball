@@ -97,14 +97,16 @@ sets `Limit64Megabytes`. An A/B test changing only that header bit showed
 reports 128 MiB installed; that is not the game's effective allocation budget.
 
 Title/replay, Easy 3 gameplay, restart/menu transitions and the large Confetti
-level, plus Rings gameplay and return-to-menu, have run under this cap. The extended run retained about **28.3 MiB
+level, plus Rings gameplay and return-to-menu, have run under this cap. The extended run retained about **21.6 MiB
 minimum sampled free RAM**. Samples do not measure every transient peak.
 This makes stock 64 MB operation a reasonable expectation, but **we have not
 tested an actual 64 MB console or every level**.
 
-There is also a known [Adventure GPU DMA failure](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10)
-that reproduces **with and without** the cap. It is not specific to 64 MB
-operation and remains unresolved. This is an experimental port, not a claim
+The [Adventure GPU DMA failure](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10)
+was traced to overflowing the default GPU command buffer. The fix increases
+that buffer from 512 KiB to 1 MiB; Adventure gameplay and restart have since
+run on the physical Xbox with the 64 MiB cap enabled. This is an experimental
+port, not a claim
 of complete compatibility or stability.
 
 See the [64 MiB validation issue](https://github.com/ZacharyLeahan/neverball-nxdk/issues/1)
