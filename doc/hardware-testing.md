@@ -815,3 +815,27 @@ The original failure log and shot-run log are retained in
 SDK patch reverse checks, fresh pinned-source patch application/equality checks,
 repeat bootstrap invocation, diagnostic patch applicability and `git diff
 --check` pass. No release asset has been replaced by this development build.
+
+### Subsequent local session and Retour de force investigation
+
+The normal-menu diagnostic `0090c7eb3b9bf41141d647479c2980c36e4556f49a8c5ec9d4109e7b6f7f9e26`
+retained flags `0x5`. The user subsequently reported that the game was playing
+well, then reported visual glitches in Retour de force. Logs retrieved after
+an ordinary launcher return (`20261020T233256Z`) record 113,345 rendered frames,
+97,058 audio callbacks, 590 EOFs and zero decode/seek errors over roughly
+34 minutes. Minimum sampled available RAM was 8,819 pages (34.4492 MiB).
+Cleanup completed normally. This successful session does not erase the earlier
+manual Neverputt freeze or establish its cause.
+
+The 60-second physical recording is retained locally as
+`build/hardware/retour-live-20261020/retour-gameplay.mp4`; it includes Retour de
+force level 01 and Easy level 02. The recorder reported 1,462 video frames,
+zero video/audio drops and 371 inserted audio-silence frames. Capture settings
+were restored. A bounded Retour baseline (`ea8cf62d276b9138eb005e2c116d57f5f0c630c15737a8f784f46c8b9c9df0f6`,
+flags `0x5`; logs `20261020T233451Z`) reported no GL errors or mesh-index
+overflow, maximum frame delta 83 ms, and 83 of 1,292 timed frames above 33 ms.
+Those counts include state transitions and are not continuous gameplay FPS.
+The visual symptom/root cause remains unconfirmed; no rendering fix is claimed.
+Temporary driver sources were restored, and the normal-menu diagnostic was
+read-back verified again at `20261020T233622Z` and relaunched. No release was
+updated. Stock 64 MiB hardware remains untested.
