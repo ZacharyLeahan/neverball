@@ -354,3 +354,6 @@ RMS 0.04464, with sound detected. It does not qualify subjective audio quality
 or long-duration stability. All testing remained on physical 128 MiB hardware;
 64 MiB support remains unverified. The pre-sync accepted XBE was retained at
 `build/releases/tested-baseline/default.xbe` before candidate deployment.
+Confirmed launcher return recovered XBMC FTP. Collected logs at
+`build/hardware/20261020T152340Z/` report 20,318 audio callbacks, 33 EOFs,
+zero decode/seek errors, and completed cleanup for launcher action 0.
