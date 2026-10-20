@@ -768,3 +768,26 @@ Deployment/readback: `20261020T223350Z`; logs: `20261020T223508Z`.
 Local PCM: `build/hardware/audio-fix/isolated-effects.wav`. The diagnostic
 changed mixer output volumes only; configured values were retained and output
 was restored before exit.
+
+
+Restored normal candidate: `v0.2.0-alpha.2-11-gb1b3b579`, SHA-256
+`3cef56be5cd06e13f8b38436f92c2b6df52cca2a780e875af2d2f5ba50f751cb`,
+flags `0x5`. Deployment/readback: `20261020T223558Z`. Normal title/replay
+rendering and music were observed; a five-second HDMI sample contained 239,040
+frames, RMS 0.094833 and 238,956 active frames. Normal sources and `sets.txt`
+were restored, and temporary course/menu fixtures and framebuffer dumps were
+removed from the separate candidate installation. The protected installation
+was untouched. KVM capture settings were not changed.
+
+Final manual navigation is pending controller reconnection: ESP's USB probe
+reported `bus=false`, `mounted=false`, and the same result after its documented
+reattach operation returned success. Title presses therefore produced no
+observed menu response; this is not recorded as a successful manual Easy 3
+check for this final normal XBE. The automated Easy 3 physics/render/audio
+cases above did complete. The normal candidate is left at the title for the
+remaining controller check.
+
+`make test ENABLE_FETCH=0 ENABLE_NLS=0`, Xbox exit checks, shell syntax checks,
+SDK patch reverse checks, fresh pinned-source patch application/equality checks,
+repeat bootstrap invocation, diagnostic patch applicability and `git diff
+--check` pass. No release asset has been replaced by this development build.
