@@ -26,8 +26,8 @@ console reboot and power off, with Cancel selected by default. See the
 [system-menu notes](doc/xbox-exit-menu.md) for configuration and test coverage.
 
 This Xbox continuation builds on [JayFoxRox / Jannik Vogel's original NXDK
-port](https://github.com/JayFoxRox/neverball/tree/xbox) and the subsequent Xbox work in the [earlier neverball-nxdk repository (now retired). The modern
-game retains upstream Neverball history, content and contributor credits, and
+port](https://github.com/JayFoxRox/neverball/tree/xbox). The modern game retains
+upstream Neverball history, content and contributor credits, and
 uses [Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11) renderer.
 
 ### Source and reference repositories
@@ -35,11 +35,8 @@ uses [Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11) renderer.
 * [This modern continuation](https://github.com/ZacharyLeahan/neverball-nxdk).
 * [Original Neverball upstream](https://github.com/Neverball/neverball) and
   [Neverball contributors](doc/authors.txt): game, engine, levels and assets.
-* Earlier `ZacharyLeahan/neverball-nxdk` continuation (retired before this
-  modern fork reused the name): the hardware-tested
-  Xbox platform reference, preserved in local repository/release backups.
 * [JayFoxRox / Jannik Vogel's original Xbox port](https://github.com/JayFoxRox/neverball/tree/xbox):
-  original Xbox/NXDK port authorship and the foundation of the older continuation.
+  original Xbox/NXDK port authorship and the foundation of this continuation.
 * [Ryzee119/nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11): the direct
   OpenGL ES renderer used by this migration.
 * [XboxDev/NXDK](https://github.com/XboxDev/nxdk): toolchain, runtime and pbkit.
