@@ -20,6 +20,35 @@ static DWORD shutdown_at;
 static enum xbox_exit_action exit_action = XBOX_EXIT_REBOOT;
 static char game_xbe[MAX_PATH];
 static char launcher[MAX_PATH] = "E:\\Dashboard\\default.xbe";
+/* Kernel-wide counters, not a malloc heap measurement. Sampled minima do
+ * not include allocations that are created and freed between samples.
+ */
+static ULONG minimum_available_pages = ~0UL;
+static void memory_log(const char *phase, int periodic)
+{
+    MM_STATISTICS m = { 0 };
+    NTSTATUS status;
+    int new_minimum;
+    m.Length = sizeof(m);
+    status = MmQueryStatistics(&m);
+    if (!NT_SUCCESS(status))
+    {
+        printf("ram phase=%s query_failed=%08lx\n", phase, status);
+        return;
+    }
+    new_minimum = m.AvailablePages < minimum_available_pages;
+    if (new_minimum) minimum_available_pages = m.AvailablePages;
+    if (periodic && !new_minimum && frames % 300) return;
+    printf("ram phase=%s frame=%u page_bytes=4096 total_pages=%lu "
+           "available_pages=%lu min_available_pages=%lu "
+           "virtual_committed_bytes=%lu virtual_reserved_bytes=%lu "
+           "cache_pages=%lu pool_pages=%lu stack_pages=%lu image_pages=%lu\n",
+           phase, frames, m.TotalPhysicalPages, m.AvailablePages,
+           minimum_available_pages, m.VirtualMemoryBytesCommitted,
+           m.VirtualMemoryBytesReserved, m.CachePagesCommitted,
+           m.PoolPagesCommitted, m.StackPagesCommitted, m.ImagePagesCommitted);
+}
+
 static DWORD WINAPI watchdog(LPVOID unused)
 {
     unsigned observed = frames;
@@ -51,6 +80,7 @@ void xbox_startup(void)
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
     printf("Modern Neverball Xbox startup\n");
+    memory_log("startup", 0);
     /* Slime Volley's verified launcher is the default for this private rig.
      * Other installations can supply a native absolute XBE path. */
     config = fopen("D:\\Neverball\\xbox-launcher.txt", "rb");
@@ -80,18 +110,15 @@ void xbox_video_init(void)
         glShowFPSNV2A(GL_FALSE);
         initialized = 1;
         printf("GLES context ready\n");
+        memory_log("graphics-ready", 0);
     }
 }
 void xbox_video_swap(void)
 {
     glFlipNV2A();
     frames++;
-    if (frames % 300 == 0) {
-        MM_STATISTICS memory = { 0 };
-        memory.Length = sizeof(memory);
-        MmQueryStatistics(&memory);
-        printf("frame %u free RAM pages %lu\n", frames, memory.AvailablePages);
-    }
+    if (frames == 1 || frames % 60 == 0)
+        memory_log("present", frames != 1);
 }
 int _mkdir(const char *path)
 {
@@ -160,12 +187,14 @@ void xbox_shutdown_begin(void)
     shutdown_at = GetTickCount();
     shutting_down = 1;
     printf("system: cleanup begin action=%d\n", exit_action);
+    memory_log("cleanup-begin", 0);
 }
 void xbox_exit(void)
 {
     FILE *history;
     exit_complete = 1;
     printf("system: cleanup complete action=%d\n", exit_action);
+    memory_log("cleanup-complete", 0);
     history = fopen("D:\\system-actions.log", "ab");
     if (history)
     {

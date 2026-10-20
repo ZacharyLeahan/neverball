@@ -406,3 +406,55 @@ reported 362 video frames, zero video/audio drops, and restored codec 0.
 The published GIF is silent and reduced to 480 pixels wide at 12 fps; it
 illustrates gameplay rather than measuring performance. Title still uses
 `build/hardware/upstream-sync-title.jpg`, a prior physical Xbox title capture.
+
+### RAM diagnostics and controlled 64 MiB limit comparison
+
+Added kernel-wide `MmQueryStatistics` logging at startup, graphics initialization,
+first presentation and both sides of cleanup. During presentation, sample every
+60 frames and log new sampled minima or each 300th frame. Counters include total
+and available physical pages (4096 bytes/page), virtual committed/reserved bytes,
+and cache/pool/stack/image pages. These are not per-process malloc accounting;
+short-lived allocation peaks between samples remain unmeasured.
+
+Capped diagnostic XBE SHA-256:
+`59a075fa72454d82b6bc7752722c83d2c44d49109b9340c467affd4ccbd2e125`.
+It has initialization flags `0x5`, including `Limit64Megabytes` (`0x4`).
+Physical Xbox coverage: title/automatic replay, menus, Easy 3 movement,
+level restart, give-up, return to title and confirmed launcher return.
+Logs: `build/hardware/20261020T170546Z/`; deployment:
+`build/hardware/20261020T170414Z/`. NXDK build, desktop unit suite,
+exit-handler sanitizers and whitespace checks passed.
+
+For comparison only, cleared that single header bit in the exact same XBE,
+verified that byte offset `0x124` was the only changed byte, and booted it on
+the same Xbox. Flag-cleared hash:
+`560733e4f03b3dfbfe72fce70d62438406fa2ffea002f2d9d19a585c4b99c0b8`.
+Comparison logs: `build/hardware/20261020T170709Z/`; deployment:
+`build/hardware/20261020T170618Z/`.
+
+| Measurement | Limit64 enabled | Limit64 disabled |
+| --- | ---: | ---: |
+| Kernel-reported installed RAM | 128 MiB | 128 MiB |
+| Free at startup | 61.074 MiB | 124.949 MiB |
+| Free at first presented frame | 41.203 MiB | 105.078 MiB |
+| Minimum sampled free | 39.879 MiB | 105.078 MiB |
+
+The startup and first-frame differences are both **63.875 MiB**. This establishes
+that the flag changes the allocation budget on this rig: the game already ran
+successfully with the 64 MiB runtime limit, despite the kernel total reporting
+the installed 128 MiB. The uncapped run covered title only; its minimum must not
+be compared as if it exercised the capped run's gameplay workload.
+
+Correction to the earlier memory interpretation: subtracting approximately
+40 MiB free from 128 MiB installed does not show that the game uses 88 MiB.
+The upper memory excluded by the runtime limit must not be counted as game
+usage. Within the nominal 64 MiB budget, about 39.9 MiB remained free in this
+bounded run; this still is not an exact application heap or peak measurement.
+The published alpha.2 XBE was also checked and already has the limit flag set.
+Actual stock 64 MiB hardware, other levels, long sessions and transient allocation
+peaks still need validation before changing release compatibility claims.
+
+Both runs completed cleanup with zero audio decode/seek errors. Restored and
+read-back verified the capped diagnostic XBE (`20261020T170720Z`); the console
+was left in XBMC. Raw A/B binaries and machine-readable summary are retained
+under `build/hardware/ram-cap-comparison/`. No firmware changes or emulator use.
