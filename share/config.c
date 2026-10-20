@@ -376,31 +376,31 @@ void config_quit(void)
  */
 static int scan_key_and_value(char **dst_key, char **dst_val, char *line)
 {
-    if (line)
-    {
-        int ks, ke, vs;
+    char *key, *end, *value;
 
-        ks = -1;
-        ke = -1;
-        vs = -1;
+    if (!line)
+        return 0;
 
-        sscanf(line, " %n%*s%n %n", &ks, &ke, &vs);
+    /* Adapted from neverball-nxdk 3c59f35087f52ca39bca819e968df8bcace27f4a
+     * (Zachary Leahan), continuing JayFoxRox/Jannik Vogel's Xbox port.
+     * NXDK's PDCLib consumes and writes a destination even for %*s.
+     * Scan directly instead of depending on scanf assignment suppression. */
+    key = line;
+    while (isspace((unsigned char) *key))
+        key++;
+    end = key;
+    while (*end && !isspace((unsigned char) *end))
+        end++;
+    if (end == key || !*end)
+        return 0;
 
-        if (ks < 0 || ke < 0 || vs < 0)
-            return 0;
-
-        if (vs - ke < 1)
-            return 0;
-
-        line[ke] = 0;
-
-        *dst_key = line + ks;
-        *dst_val = line + vs;
-
-        return 1;
-    }
-
-    return 0;
+    value = end;
+    while (isspace((unsigned char) *value))
+        value++;
+    *end = 0;
+    *dst_key = key;
+    *dst_val = value;
+    return 1;
 }
 
 void config_load(void)
