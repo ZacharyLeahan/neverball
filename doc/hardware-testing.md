@@ -357,3 +357,42 @@ or long-duration stability. All testing remained on physical 128 MiB hardware;
 Confirmed launcher return recovered XBMC FTP. Collected logs at
 `build/hardware/20261020T152340Z/` report 20,318 audio callbacks, 33 EOFs,
 zero decode/seek errors, and completed cleanup for launcher action 0.
+
+
+### Goal and teleporter point-sprite correction
+
+The published v0.2.0-alpha.1 XBE rendered portal particles as solid squares.
+`share/geom.c` now assigns the base texture to GL_TEXTURE3 on NXDK in all
+four texture pipelines. The pinned renderer identifies this as the NV2A
+point-sprite texture unit. Shadow and clip assignments remain separate, and
+desktop assignments retain their existing units. No dependency revision or
+renderer register writes changed.
+
+Fixed candidate XBE SHA-256:
+`10c7c715239ce10daca8679cd693af8e4f6867a40ab729269a05ff5cef50ab47`.
+NXDK build, desktop unit suite and exit-handler sanitizer checks passed.
+
+Physical 128 MiB Xbox tests used reversible data fixtures with the unmodified
+candidate XBE. A copy of Easy 1 opened the goal immediately and placed the
+ball nearby. Goal stars were textured and animated, and entry reached the
+completion/record screen. A second fixture added a standard target_teleporter
+and target_position to that geometry, staged temporarily as Easy 2. Its
+cross-shaped sparkles rendered with the goal stars; D-pad tilt moved the ball
+into the trigger and it arrived at the destination. This was fixture-based
+rendering/transition coverage, not earned progression or a full stock-level run.
+
+Evidence under `build/hardware/portal-effect-test/`: `fix-goal-first.jpg`,
+`goal-entry-result2.jpg`, `fix-teleporter-before.jpg`, and
+`teleporter-destination.jpg`; bounded 8-second goal and 10-second teleporter
+animation recordings. Recorder reported zero video/audio drops and restored
+the prior codec (0) after both clips. Original Easy 1/2 data were retained for
+restoration. No emulator or Discord posting was involved. Stock 64 MiB support
+remains unverified.
+
+Both original Easy 1/2 files were restored byte-for-byte and read-back
+verified at `build/hardware/20261020T162045Z/`. The same fixed XBE then loaded
+unmodified Easy 3: floor/ball textures, visible rotating coins, ball shadow
+and D-pad movement were observed (`regression-easy3.jpg`). Portal-run cleanup
+logs at that timestamp report 6,097 audio callbacks, 39 EOFs, zero decode/seek
+errors and completed launcher cleanup. This is bounded hardware coverage;
+reflective levels and long-duration transitions have not been requalified.
