@@ -458,3 +458,35 @@ Both runs completed cleanup with zero audio decode/seek errors. Restored and
 read-back verified the capped diagnostic XBE (`20261020T170720Z`); the console
 was left in XBMC. Raw A/B binaries and machine-readable summary are retained
 under `build/hardware/ram-cap-comparison/`. No firmware changes or emulator use.
+
+### Expanded capped coverage and Adventure failure
+
+Used the same RAM-diagnostic XBE with the existing 64 MiB flag enabled. A
+reversible `set-ram-validation.txt` menu referenced unchanged stock SOL files;
+an isolated `Scores/ram-validation.txt` fixture unlocked test access without
+claiming earned progression. The normal `sets.txt` was backed up first.
+Deployment/read-back: `build/hardware/20261020T171128Z/`.
+
+Confetti (`map-fwp/confetti.sol`, approximately 2.75 MB compiled) loaded,
+rendered and responded to D-pad input. Its scene remained live during the
+extended run. Minimum sampled free RAM across this capped run was 8,806 pages,
+**34.398 MiB**. However, selecting Adventure (`map-fwp/adventure.sol`, about
+3.24 MB, the largest bundled Neverball SOL) triggered a GPU/pbkit DMA
+invalid-data screen. Dashboard FTP did not recover; the user rebooted.
+Recovered capped log: `build/hardware/20261020T171926Z/`.
+
+Repeated the Confetti-to-Adventure selection with only the XBE limit bit
+cleared (the previously recorded flag-disabled binary), deployed/read-back
+verified at `20261020T171927Z`. Confirmed Adventure selection on screen before
+loading it. The same class of DMA invalid-data screen appeared without the
+cap. This establishes that the failure is not exclusive to the 64 MiB runtime
+budget; the precise malformed command/root cause remains unknown. A second
+physical reboot was requested to retrieve that log and restore the capped
+setup. Remaining planned levels and course coverage were not completed at
+this point and must not be reported as passes.
+
+[Issue #10](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10) records
+reproduction details, hashes, comparisons and screenshots. Captures are under
+`build/hardware/64mib-extended/`; capped and uncapped error images are preserved
+in `doc/images/ram-validation/`. Stock-console support remains an expectation
+based on capped tests, not actual stock-hardware qualification.

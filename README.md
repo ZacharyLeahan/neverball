@@ -1,6 +1,7 @@
 # neverball-nxdk
 
-> **Requires a 128 MB (128 MiB) original Xbox. Stock 64 MB consoles are not supported by this release.**
+> **64 MB (64 MiB) Xbox support is expected, but has not been verified on a stock console.**
+> The developer's Xbox has **128 MB RAM**. Tests use its verified **64 MiB runtime limit**; this is evidence for compatibility, not a stock-hardware guarantee.
 
 **[Download the full game — v0.2.0-alpha.2 (Xbox ZIP)](https://github.com/ZacharyLeahan/neverball-nxdk/releases/download/v0.2.0-alpha.2/neverball-nxdk-v0.2.0-alpha.2-xbox-128mb.zip)**
 · [Release notes, standalone XBE, source and checksums](https://github.com/ZacharyLeahan/neverball-nxdk/releases/tag/v0.2.0-alpha.2)
@@ -32,7 +33,7 @@ worth 5.  Blue coins are worth 10.  A ball is awarded for 100 coins.
 The modern game runs on a physical **128 MiB original Xbox** using NXDK and
 [Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11). Local hardware testing confirmed playable Easy level 3,
 correct coin rendering, responsive controls, music and effects. Automatic title
-replay and repeated restarts were also observed. **64 MiB support is unverified.**
+replay and repeated restarts were also observed. **Stock 64 MiB hardware remains unverified; see the RAM notes below.**
 Easy 3 access in the isolated test installation uses a backed-up test unlock;
 this is not a claim of earned progression or level completion.
 
@@ -85,8 +86,30 @@ The integration is concrete and reproducible:
   verified on the physical Xbox; before/after captures are in the issue.
 
 See the [port notes](doc/nxdk.md) for backend constraints, dependency attribution
-and build instructions. The game currently requires a **128 MiB Xbox**;
-using this renderer does not establish stock 64 MiB support.
+and build instructions. Renderer support alone does not establish RAM
+compatibility; see the capped hardware tests below.
+
+### 64 MB compatibility: expected, not yet confirmed on stock hardware
+
+The developer's physical Xbox has **128 MiB installed**, but the XBE already
+sets `Limit64Megabytes`. An A/B test changing only that header bit showed
+**63.875 MiB less available memory with the limit enabled**. The kernel still
+reports 128 MiB installed; that is not the game's effective allocation budget.
+
+Title/replay, Easy 3 gameplay, restart/menu transitions and the large Confetti
+level have run under this cap. The extended run retained about **34.4 MiB
+minimum sampled free RAM**. Samples do not measure every transient peak.
+This makes stock 64 MB operation a reasonable expectation, but **we have not
+tested an actual 64 MB console or every level**.
+
+There is also a known [Adventure GPU DMA failure](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10)
+that reproduces **with and without** the cap. It is not specific to 64 MB
+operation and remains unresolved. This is an experimental port, not a claim
+of complete compatibility or stability.
+
+See the [64 MiB validation issue](https://github.com/ZacharyLeahan/neverball-nxdk/issues/1)
+and [hardware ledger](doc/hardware-testing.md) for exact test coverage,
+XBE hashes and remaining checks. Reports from stock 64 MB Xbox owners are welcome.
 
 ### Source and reference repositories
 

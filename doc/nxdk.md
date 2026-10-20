@@ -113,7 +113,8 @@ actual notices and resolve packaging requirements before a release.
 ## Physical hardware qualification
 
 The [current Xbox prerelease](https://github.com/ZacharyLeahan/neverball-nxdk/releases/tag/v0.2.0-alpha.1)
-requires a physical **128 MiB Xbox**. Stock 64 MiB support remains unestablished;
+was initially qualified on a physical **128 MiB Xbox**. Stock 64 MiB operation
+is now expected from capped testing, but remains unverified on an actual stock console;
 see the hardware ledger for exact tested hashes and validation limits.
 The existing known-good installation at `/F/neverball-nxdk` must remain intact.
 That is an Xbox filesystem path, not a separate repository. Use
@@ -124,8 +125,9 @@ confirmed that the XBE's existing `Limit64Megabytes` flag reduces available
 memory by about 64 MiB on the upgraded test console. Title/replay and Easy 3
 ran within that limited budget, with about 39.9 MiB sampled free. The kernel's
 128 MiB total describes installed RAM, not the effective runtime budget.
-Stock 64 MiB hardware remains untested, so release compatibility claims remain
-unchanged.
+Stock 64 MiB hardware remains untested. See the README for the current
+qualified compatibility statement and the known Adventure DMA failure, which
+reproduces with and without the limit.
 
 Rig: Xbox FTP `192.168.1.254`, ESP KVM `http://192.168.1.169/`.
 KVM project: https://github.com/ZacharyLeahan/espkvm-xbox .
