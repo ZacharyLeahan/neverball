@@ -54,7 +54,8 @@ The menu/action pattern is adapted from the hardware-tested
 [Slime Volley Xbox port](https://github.com/ZacharyLeahan/slimevolley-nxdk),
 specifically [Platform.c at 65c86911](https://github.com/ZacharyLeahan/slimevolley-nxdk/blob/65c86911fe5ab199e7853886af7c71d8ad1e5085/ports/nxdk/Platform.c).
 The implementation uses Neverball's existing GUI/state system. It retains the
-original Neverball and JayFoxRox/Jannik Vogel port notices and dependency
+original [Neverball](https://github.com/Neverball/neverball) and
+[JayFoxRox/Jannik Vogel port](https://github.com/JayFoxRox/neverball/tree/xbox) notices and dependency
 attribution.
 
 Host verification: full NXDK XBE build, desktop unit tests, and

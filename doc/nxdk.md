@@ -3,7 +3,7 @@
 
 Current hardware candidate: `8b92b320791d87d5cc1af6d9c8a9a777ba70b5282fbd0c9ead5006b7f3eceb42`.
 The full modern game builds and boots on the physical 128 MiB Xbox with
-direct nxdk-gles11. Menu/controller operation, Easy 1 and Easy 3 gameplay/coin collection, automatic
+direct [nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11). Menu/controller operation, Easy 1 and Easy 3 gameplay/coin collection, automatic
 title replay, repeated restarts and menu Exit have been observed. Easy 3
 access uses a backed-up unlocked-only test save. The user subsequently confirmed
 local Easy-3 playability, correct coins, controls, music and effects on this
@@ -28,7 +28,7 @@ lighting, clipping, texture environments and particle point sprites match
 the candidate backend's implemented entry points. Symbol availability is not
 semantic or hardware qualification. Retain upstream gameplay and assets.
 
-Pinned renderer: https://github.com/Ryzee119/nxdk-gles11 at
+Pinned renderer: [Ryzee119/nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11) at
 `0cf17fa709f42158d11a1571f87705b692699bd3`.
 Its arena submodule is `30a1d31f19afb33d45be799dc971ee848ae26dca`.
 The README reports Neverball rendering on real hardware; that does not qualify
@@ -82,11 +82,12 @@ tracked changes. Submodules use the renderer's recorded revisions.
 
 ## Platform adaptation and provenance
 
-The older port at https://github.com/ZacharyLeahan/neverball-nxdk remains a
-separate reference and known-good installation. Its README, development notes,
+The older [ZacharyLeahan/neverball-nxdk port](https://github.com/ZacharyLeahan/neverball-nxdk)
+(repository now retired) is preserved in local backups; its separate known-good
+Xbox installation remains intact. Its README, development notes,
 hardware ledger, deployment/packaging tools, SDK bootstrap/patches and build
-rules informed this evaluation. It continues JayFoxRox / Jannik Vogel's
-original port at `42a8be94970117c91c4ed9c54f80713256138e56`.
+rules informed this evaluation. It continues [JayFoxRox / Jannik Vogel's
+original port](https://github.com/JayFoxRox/neverball/tree/xbox) at `42a8be94970117c91c4ed9c54f80713256138e56`.
 
 `share/config.c` adapts direct key/value scanning from older-port commit
 `3c59f35087f52ca39bca819e968df8bcace27f4a` (Zachary Leahan).
@@ -101,8 +102,10 @@ Still to adapt after checking modern implementations: UTC replay timestamps
 bounded decoder retries, mixer lock scope, audio buffering and controller
 mapping. Keep overlay selection explicit and default release builds off.
 
-Preserve all Neverball author and asset notices. Credit Ryzee119's backend,
-JayFoxRox/xgu-gl lighting, dracc/xgu, arena, stb and other bundled notices.
+Preserve all Neverball author and asset notices. Credit [Ryzee119's backend](https://github.com/Ryzee119/nxdk-gles11),
+[JayFoxRox/xgu-gl](https://github.com/JayFoxRox/xgu-gl) lighting,
+[dracc/xgu](https://github.com/dracc/xgu), and the arena, stb and other bundled
+notices linked from the pinned renderer's source and submodules.
 The renderer has no top-level license file in this revision: retain and audit
 per-file notices before distribution. In particular, README describes swizzle
 as GPLv2 while bundled `lib/swizzle/swizzle.c` carries LGPL-2-or-later text

@@ -11,7 +11,7 @@ worth 5.  Blue coins are worth 10.  A ball is awarded for 100 coins.
 ## Original Xbox development
 
 The modern game runs on a physical **128 MiB original Xbox** using NXDK and
-Ryzee119's nxdk-gles11. Local hardware testing confirmed playable Easy level 3,
+[Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11). Local hardware testing confirmed playable Easy level 3,
 correct coin rendering, responsive controls, music and effects. Automatic title
 replay and repeated restarts were also observed. **64 MiB support is unverified.**
 Easy 3 access in the isolated test installation uses a backed-up test unlock;
@@ -25,17 +25,19 @@ Xbox **Exit** offers confirmed launcher return, game restart,
 console reboot and power off, with Cancel selected by default. See the
 [system-menu notes](doc/xbox-exit-menu.md) for configuration and test coverage.
 
-This Xbox continuation builds on JayFoxRox / Jannik Vogel's original NXDK
-port and the subsequent Xbox work in ZacharyLeahan/neverball-nxdk. The modern
+This Xbox continuation builds on [JayFoxRox / Jannik Vogel's original NXDK
+port](https://github.com/JayFoxRox/neverball/tree/xbox) and the subsequent Xbox work in the [earlier neverball-nxdk repository](https://github.com/ZacharyLeahan/neverball-nxdk)
+(now retired). The modern
 game retains upstream Neverball history, content and contributor credits, and
-uses Ryzee119's nxdk-gles11 renderer.
+uses [Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11) renderer.
 
 ### Source and reference repositories
 
 * [This modern continuation](https://github.com/ZacharyLeahan/neverball).
 * [Original Neverball upstream](https://github.com/Neverball/neverball) and
   [Neverball contributors](doc/authors.txt): game, engine, levels and assets.
-* Earlier `ZacharyLeahan/neverball-nxdk` continuation: the hardware-tested
+* Earlier [ZacharyLeahan/neverball-nxdk](https://github.com/ZacharyLeahan/neverball-nxdk)
+  continuation (repository now retired): the hardware-tested
   Xbox platform reference, preserved in local repository/release backups.
 * [JayFoxRox / Jannik Vogel's original Xbox port](https://github.com/JayFoxRox/neverball/tree/xbox):
   original Xbox/NXDK port authorship and the foundation of the older continuation.
