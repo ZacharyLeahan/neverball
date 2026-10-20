@@ -96,11 +96,18 @@ sets `Limit64Megabytes`. An A/B test changing only that header bit showed
 **63.875 MiB less available memory with the limit enabled**. The kernel still
 reports 128 MiB installed; that is not the game's effective allocation budget.
 
-Title/replay, Easy 3 gameplay, restart/menu transitions and the large Confetti
-level, plus Rings gameplay and return-to-menu, have run under this cap. The extended run retained about **21.6 MiB
-minimum sampled free RAM**. Samples do not measure every transient peak.
-This makes stock 64 MB operation a reasonable expectation, but **we have not
-tested an actual 64 MB console or every level**.
+Title/replay, Easy 3 gameplay and restart/menu transitions have run under this
+cap. An extended hardware run completed **16 Neverball load/render cycles**
+(two passes through seven large levels and Easy 3), **six Neverputt holes**,
+and switches between both games. Minimum sampled free RAM was **21.38 MiB**;
+samples do not measure every transient peak. These were bounded rendering and
+physics checks, not level completions or a performance guarantee.
+
+**Stock 64 MB hardware remains untested.** The second Neverball pass ended with
+0.78 MiB less free memory, requiring longer investigation. The latest tests also
+found [silent audio with zero mixer callbacks](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14); audio is a failing check despite
+successful earlier builds. See the [hardware ledger](doc/hardware-testing.md#expanded-capped-tests-and-startup-texture-state)
+for exact binaries, coverage and outstanding checks.
 
 The [Adventure GPU DMA failure](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10)
 was traced to overflowing the default GPU command buffer. The fix increases

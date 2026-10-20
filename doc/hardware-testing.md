@@ -546,3 +546,100 @@ quality assessment. Cleanup completed and Return to launcher restored XBMC
 without a physical reboot. Restored normal `sets.txt`, deleted the temporary
 Adventure menu, and read-back verified the normal installation at
 `build/hardware/20261020T193836Z/`. Protected known-good installation untouched.
+
+
+### Expanded capped tests and startup texture state
+
+2026-10-20, physical 128 MiB development Xbox, separate
+`/F/neverball-upstream` installation. All binaries below retain initialization
+flags `0x5`, including `Limit64Megabytes`. No emulator or stock 64 MiB console
+was used. The protected known-good installation was untouched.
+
+PR [#12](https://github.com/ZacharyLeahan/neverball-nxdk/pull/12) merged the
+Adventure command-buffer fix into this fork's master. Expanded testing then
+reproduced a black startup screen, tracked in
+[issue #13](https://github.com/ZacharyLeahan/neverball-nxdk/issues/13).
+Presentation and timers advanced while the framebuffer remained black, with
+roughly 40 MiB free. Both command-buffer sizes reproduced it. Solid-color,
+client-array and VBO diagnostic draws worked. Disabling blending exposed the
+menu geometry; selecting base texture unit 0 also restored rendering.
+
+`video_init` enabled texture unit 0 before `geom.c` selected unit 3 for the
+NV2A point-sprite path. The unintended extra stage could multiply output alpha
+by an unrelated texture. The fix selects server and client unit 3 before the
+initial texture enable. It retains the portal-star pipeline and makes no
+renderer dependency changes. The pinned nxdk-gles11 revision remains
+`0cf17fa709f42158d11a1571f87705b692699bd3`.
+
+| Before startup fix | After startup fix |
+| --- | --- |
+| ![Black title framebuffer](images/ram-validation/startup-black.png) | ![Rendered title](images/ram-validation/startup-fixed.png) |
+
+#### Bounded coverage and memory
+
+The Neverball driver used normal level loading, overview, ready/set/play,
+physics, drawing, progress stop and return-to-title paths. It ran two passes
+through Adventure, Rings, Confetti, Buoys, Inferno, Spacetime, UFO and Easy 3
+(`map-easy/coins.sol`). The first seven are the largest bundled Neverball SOLs.
+All 16 cases painted gameplay frames and returned GL error 0; the driver
+reported `loads=16 failures=0`. This does not establish level completion,
+adequate frame rate, every camera path or every level.
+
+![Both Neverball passes](images/ram-validation/ball-contact-sheet.jpg)
+
+Minimum sampled free memory was 5,473 pages, **21.3789 MiB**. End-of-pass title
+samples fell from 9,850 to 9,650 free pages (**0.78125 MiB**), with identical
+7,733,248-byte virtual commitment. The cause is not established; this is not a
+leak-free or long-session stability result.
+
+The Neverputt driver loaded Bankaround, Hourglass, Voodoo, Corkscrewspin,
+iPutt18 and the first easy hole, using normal flyby, stroke, roll and
+`hole_move` paths. All six painted stroke/roll frames with GL error 0. It then
+switched between Neverputt and Neverball titles twice. Minimum across periodic
+and explicit stage samples was 8,851 free pages, **34.5742 MiB**. The driver
+advanced holes; it did not earn course completion.
+
+![Six Neverputt holes](images/ram-validation/putt-contact-sheet.jpg)
+
+#### Exact test builds and reproduction
+
+| Build | XBE SHA-256 | Local deployment / final log evidence |
+| --- | --- | --- |
+| Normal startup fix | `524417c29d0ae36fcaac067de3094894f8092df51be50ba0cfc1466fd2b79046` | `20261020T210008Z` |
+| Neverball cycle driver | `29b76655f8a0398e82b10c4a219cc5b832d71586e8852a0330b1a77ba3dc5016` | `20261020T211034Z` / `20261020T211556Z` |
+| Neverputt cycle driver | `3dcd33defce7b71e398ad7ab9c5e5df99328c20f9ccab233480ce0d17ab23ea7` | `20261020T212256Z` / `20261020T212437Z` |
+| Audio startup diagnostic | `84b640b0168ba9fc58ffdd98a9fb4b78bae147e0716df6fc6381b50fccf54751` | `20261020T212614Z` / `20261020T212707Z` |
+| Restored normal build | `0723dbf4cd4bab64ae551ec90c5683ee905ead7ffcfafef6da588ad760b10d7e` | `20261020T212854Z` |
+
+Evidence folders are under `build/hardware/`. The first normal build predates
+refreshing the generated version label; it is not the final binary hash.
+The restored normal build reports `v0.2.0-alpha.2-8-ga23f31bd`.
+
+Reproducible temporary test sources are preserved as
+[the Neverball patch](hardware-tests/64mib-ball-cycle.patch),
+[the Neverputt patch](hardware-tests/64mib-putt-cycle.patch), and
+[the temporary course fixture](hardware-tests/holes-ram-stress.txt).
+Apply one patch at a time in an isolated worktree containing the startup fix,
+using the pinned SDK and renderer from the build notes. These patches are only
+for Xbox diagnostic builds. For Neverputt, copy the fixture into
+`bin/Neverball/holes-ram-stress.txt`. Build with `Makefile.nxdk`, verify header
+bit 4 at offset `0x124`, deploy/read-back verify to a separate directory, launch,
+and retrieve logs and raw captures after automatic launcher return. The
+stock SOL files are unchanged. Restore the source, remove the temporary course
+and menu fixtures, rebuild and deploy the normal XBE afterward. Temporary
+framebuffer dumps and fixtures from this run were removed from the candidate
+installation; normal sources and `sets.txt` were restored.
+
+#### Audio remains a failing check
+
+Tracked in [issue #14](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14).
+
+Both automated cycles reported **zero mixer callbacks**. Zero decoder/seek
+errors therefore do not establish functioning audio. A five-second Neverputt
+HDMI PCM observation contained 238,320 frames, all zero. A subsequent diagnostic
+after asking for a full power cycle also recorded zero callbacks and 235,680
+silent PCM frames. The user reported the dashboard was back; the power-off
+sequence was not independently observed. Two controllers were detected in the
+latter run. Earlier accepted builds had working audio, so this is an unresolved
+regression or hardware-state problem, not evidence that all capped acceptance
+checks pass. Its relationship to the memory cap is not established.
