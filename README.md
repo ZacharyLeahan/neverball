@@ -30,6 +30,45 @@ port](https://github.com/JayFoxRox/neverball/tree/xbox). The modern game retains
 upstream Neverball history, content and contributor credits, and
 uses [Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11) renderer.
 
+### Rendering with nxdk-gles11
+
+**This Xbox port builds and links [Ryzee119's nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11)
+as its active graphics backend.** It is a runtime dependency compiled into the
+XBE. Ryzee119 deserves credit for the GLES implementation that makes this
+rendering path possible.
+
+Neverball already has an OpenGL ES rendering path. We compile that path with
+`ENABLE_OPENGLES=1`; nxdk-gles11 implements its GLES calls for the original
+Xbox's NV2A GPU through NXDK/pbkit:
+
+**Neverball's GLES renderer → nxdk-gles11 → NXDK/pbkit → Xbox NV2A GPU**
+
+This lets the modern game reuse its existing rendering code for level geometry,
+textures, lighting, fog, vertex buffers, shadows and particle effects on Xbox.
+The backend also supplies the graphics-context and frame-presentation hooks
+used by the Xbox platform code. Together, these enable the modern levels,
+ball and coin rendering, title replay visuals, and portal effects seen in our
+physical hardware tests. Controller input, audio and the Xbox system menu are
+handled by the game's separate platform integration.
+
+The integration is concrete and reproducible:
+
+* [Renderer bootstrap](scripts/bootstrap-xbox-renderer.py) fetches the pinned
+  nxdk-gles11 revision `0cf17fa709f42158d11a1571f87705b692699bd3`.
+* [Xbox CMake configuration](xbox/CMakeLists.txt) compiles the renderer, and
+  [Makefile.nxdk](Makefile.nxdk) links `GLESv1_CM`, `swizzle` and `arena` into the
+  game alongside pbkit. We use GLES directly; the optional gl4es layer is disabled.
+* [Xbox platform code](xbox/platform.c) calls its `glContextInit` and `glFlipNV2A`
+  hooks to initialize graphics and present frames.
+* [The portal-particle fix](https://github.com/ZacharyLeahan/neverball-nxdk/issues/6)
+  adapts Neverball's base-texture assignment to the backend's NV2A point-sprite
+  requirement: texture unit 3. Goal stars and teleporter sparkles were then
+  verified on the physical Xbox; before/after captures are in the issue.
+
+See the [port notes](doc/nxdk.md) for backend constraints, dependency attribution
+and build instructions. The game currently requires a **128 MiB Xbox**;
+using this renderer does not establish stock 64 MiB support.
+
 ### Source and reference repositories
 
 * [This modern continuation](https://github.com/ZacharyLeahan/neverball-nxdk).
