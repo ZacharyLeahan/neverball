@@ -1028,9 +1028,12 @@ int main(int argc, char *argv[])
     while (!mainloop.done)
         step(&mainloop);
 
+#ifdef NXDK
+    xbox_shutdown_begin();
+#endif
     main_quit();
 #ifdef NXDK
-    XReboot();
+    xbox_exit();
 #endif
 #endif
 

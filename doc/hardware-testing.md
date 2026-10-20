@@ -237,3 +237,70 @@ Accepted XBE SHA-256:
 
 The user requested committing and pushing the migration branch. No release
 publication or merge to master was requested.
+
+
+## Xbox Exit / System menu — 2026-10-20
+
+Branch `codex/xbox-exit-menu` layers the Slime Volley system-menu pattern onto
+modern Neverball's native GUI. Reference: slimevolley-nxdk commit
+`65c86911fe5ab199e7853886af7c71d8ad1e5085`, `ports/nxdk/Platform.c`.
+No older-port, dashboard or boot configuration files were modified.
+
+The launcher at `/E/Dashboard/default.xbe` matched XBMC's `/Q/default.xbe` by
+full readback SHA-256:
+`2cbfeeb3e888e8df74316b33ea0ab056c2ea401ad09032507fed06a59fd9bbbe`.
+
+First candidate XBE:
+`179112e4021556b03cea09aa46740cd223d51a4f7752a7437e798e9b8a806fb9`.
+Deployment/readback manifest: `build/hardware/20261020T135246Z/deploy.json`.
+The menu opened with Cancel selected (`exit-menu.jpg`). Cancel returned to
+title, and the launcher confirmation also selected Cancel initially
+(`launcher-confirm.jpg`). Confirming Return to launcher reached dashboard FTP;
+logs in `build/hardware/20261020T135553Z/` record action 0, normal audio cleanup
+(zero decode/seek errors), and cleanup-complete target `E:\Dashboard\default.xbe`.
+
+The initial Restart game preflight rejected the native current-XBE path with
+DOS attribute error 123; the error screen kept the game running
+(`restart-confirm-cancel.jpg`). The correction uses a rootless NT file open
+as in NXDK's hal/xbox.c before invoking XLaunchXBE with the native path.
+
+Corrected candidate XBE:
+`abcfee4843af9fdd1930e35b13724a27a3cebc40b0ca80789eec8514d0a8d217`.
+Deployment/readback manifest: `build/hardware/20261020T135619Z/deploy.json`.
+Power-off and reboot confirmations displayed Cancel selected
+(`poweroff-confirm.jpg`, `reboot-confirm.jpg`). A on default Cancel left the
+power-off confirmation without taking an action; B cancelled the reboot
+confirmation. Restart game then displayed its confirmation with Cancel
+selected (`restart-confirm-native.jpg`). Explicitly selecting Restart game
+reloaded the executable: an initial fade capture was followed by a fresh title
+menu (`restart-game-result.jpg`, `restart-game-title.jpg`).
+
+The corrected candidate was then used to explicitly select Reboot Xbox after
+the restart (`reboot-confirm-after-restart.jpg`). The outcome and action log
+are recorded below after dashboard verification. Actual power-off is not
+performed in this run; its confirmation/cancel behavior is qualified, not the
+new port's final power-off dispatch. The SMC call follows the hardware-tested
+reference implementation.
+
+Host checks: NXDK build, desktop unit tests, exit-handler sanitizer checks and
+`git diff --check` passed. No emulator was used. The final source changes after
+the tested build only refine provenance comments and documentation.
+
+
+Reboot verification completed without a physical intervention. Dashboard FTP
+returned and logs were saved to `build/hardware/20261020T140136Z/`.
+`system-actions.log` records, in order:
+
+```text
+action=0 cleanup=complete target=E:\Dashboard\default.xbe
+action=1 cleanup=complete target=\Device\Harddisk0\Partition6\neverball-upstream\default.xbe
+action=2 cleanup=complete target=system
+```
+
+The final stdout log also records cleanup begin/complete for action 2, with
+4,200 audio callbacks, four EOFs and zero decode/seek errors. Fresh dashboard
+capture: `build/hardware/reboot-xbox-result.jpg`. Thus launcher return, game
+restart and firmware reboot are physically qualified for the described
+candidates. Power-off dispatch remains unexecuted in this Neverball test; the
+confirmation and safe cancellation were exercised. No release or merge is
+part of this feature task.

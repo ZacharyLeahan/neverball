@@ -201,3 +201,11 @@ than depending on that unpublished local SDK commit. SDL source HEAD is
 `2554902f7` (as pinned by the SDK). A clean binary rebuild remains unqualified.
 Replay UTC conversion provenance is older-port commit
 `458301d1f3e1989bdf8b09060d3f3540531b0b46` (Zachary Leahan).
+
+
+## Xbox system menu
+
+The subsequent `codex/xbox-exit-menu` change replaces immediate Xbox title-menu
+exit with an Xbox-only system menu following the Slime Volley port. See
+[Exit / System](xbox-exit-menu.md) for actions, launcher configuration, cleanup,
+provenance and validation. Desktop exit behavior remains unchanged.

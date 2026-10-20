@@ -42,6 +42,9 @@
 #include "st_set.h"
 #include "st_name.h"
 #include "st_shared.h"
+#ifdef NXDK
+#include "platform.h"
+#endif
 #include "st_package.h"
 
 /*---------------------------------------------------------------------------*/
@@ -108,7 +111,11 @@ static int title_action(int tok, int val)
     switch (tok)
     {
     case GUI_BACK:
+#ifdef NXDK
+        return xbox_exit_menu();
+#else
         return 0;
+#endif
         break;
 
     case TITLE_PLAY:
@@ -212,7 +219,11 @@ static int title_gui(void)
                         gui_state(kd, gt_prefix("menu^Help"), GUI_MED, TITLE_HELP, 0);
 
                     gui_state(kd, gt_prefix("menu^Options"), GUI_MED, TITLE_CONF, 0);
-                    gui_state(kd, gt_prefix("menu^Exit"),    GUI_MED, GUI_BACK, 0);
+#ifdef NXDK
+                    gui_state(kd, "Exit / System...", GUI_MED, GUI_BACK, 0);
+#else
+                    gui_state(kd, gt_prefix("menu^Exit"), GUI_MED, GUI_BACK, 0);
+#endif
 
                     /* Hilight the start button. */
 

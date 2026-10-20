@@ -21,6 +21,10 @@ See [build and port notes](doc/nxdk.md) and the
 [physical hardware ledger](doc/hardware-testing.md) for commands, dependency
 pins, exact tested XBE hashes and remaining limitations.
 
+Xbox **Exit / System...** offers confirmed launcher return, game restart,
+console reboot and power off, with Cancel selected by default. See the
+[system-menu notes](doc/xbox-exit-menu.md) for configuration and test coverage.
+
 ### Source and reference repositories
 
 * [This modern continuation](https://github.com/ZacharyLeahan/neverball).

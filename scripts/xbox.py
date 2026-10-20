@@ -64,7 +64,7 @@ with FTP(a.host, timeout=15) as ftp:
 
         mkdirs(a.directory)
         # Retain evidence before replacing an earlier candidate.
-        for name in ['default.xbe', 'log.txt', 'stderr.txt', 'watchdog.log']:
+        for name in ['default.xbe', 'log.txt', 'stderr.txt', 'watchdog.log', 'system-actions.log']:
             try:
                 data = bytearray()
                 ftp.retrbinary('RETR ' + name, data.extend)
@@ -147,7 +147,7 @@ with FTP(a.host, timeout=15) as ftp:
             print(type(error).__name__, 'during launch; inspect KVM for outcome')
     else:
         ftp.cwd(a.directory)
-        for name in ['log.txt', 'stderr.txt', 'watchdog.log']:
+        for name in ['log.txt', 'stderr.txt', 'watchdog.log', 'system-actions.log']:
             try:
                 with (evidence / name).open('wb') as out:
                     ftp.retrbinary('RETR ' + name, out.write)

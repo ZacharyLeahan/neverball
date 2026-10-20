@@ -8,10 +8,18 @@
 #include <xboxkrnl/xboxkrnl.h>
 #include <hal/xbox.h>
 #include <stdio.h>
+#include <string.h>
+#include <nxdk/path.h>
+#include <nxdk/mount.h>
 #include <GLES/gl.h>
 #include "platform.h"
 static volatile unsigned frames;
 static int initialized;
+static volatile int shutting_down, exit_complete;
+static DWORD shutdown_at;
+static enum xbox_exit_action exit_action = XBOX_EXIT_REBOOT;
+static char game_xbe[MAX_PATH];
+static char launcher[MAX_PATH] = "E:\\Dashboard\\default.xbe";
 static DWORD WINAPI watchdog(LPVOID unused)
 {
     unsigned observed = frames;
@@ -19,6 +27,14 @@ static DWORD WINAPI watchdog(LPVOID unused)
     (void)unused;
     for (;;) {
         Sleep(1000);
+        if (exit_complete) continue;
+        if (shutting_down && GetTickCount() - shutdown_at > 15000)
+        {
+            FILE *log = fopen("D:\\watchdog.log", "wb");
+            if (log) { fputs("Shutdown exceeded 15 seconds\n", log); fclose(log); }
+            XReboot();
+            return 0;
+        }
         if (observed != frames) { observed = frames; progress = GetTickCount(); }
         else if (GetTickCount() - progress > 60000) { XReboot(); return 0; }
     }
@@ -26,11 +42,31 @@ static DWORD WINAPI watchdog(LPVOID unused)
 void xbox_startup(void)
 {
     HANDLE guard;
+    FILE *config;
+    nxGetCurrentXbeNtPath(game_xbe);
+    if (!nxIsDriveMounted('E'))
+        nxMountDrive('E', "\\Device\\Harddisk0\\Partition1");
     freopen("D:\\log.txt", "wb", stdout);
     freopen("D:\\stderr.txt", "wb", stderr);
     setvbuf(stdout, NULL, _IONBF, 0);
     setvbuf(stderr, NULL, _IONBF, 0);
     printf("Modern Neverball Xbox startup\n");
+    /* Slime Volley's verified launcher is the default for this private rig.
+     * Other installations can supply a native absolute XBE path. */
+    config = fopen("D:\\Neverball\\xbox-launcher.txt", "rb");
+    if (config)
+    {
+        if (fgets(launcher, sizeof(launcher), config))
+        {
+            char *p;
+            if (!strchr(launcher, '\n') && !feof(config)) launcher[0] = 0;
+            launcher[strcspn(launcher, "\r\n")] = 0;
+            for (p = launcher; *p; p++) if (*p == '/') *p = '\\';
+        }
+        else launcher[0] = 0;
+        fclose(config);
+    }
+    printf("system: game=%s launcher=%s\n", game_xbe, launcher);
     /* SDL's Xbox video driver queries this mode during SDL_Init. */
     if (!XVideoSetMode(640, 480, 32, REFRESH_DEFAULT))
         printf("XVideoSetMode failed\n");
@@ -75,4 +111,79 @@ int gettimeofday(struct timeval *tv, struct timezone *tz)
     tv->tv_sec = (unsigned)(ticks.QuadPart / 10000000ULL);
     tv->tv_usec = (unsigned)((ticks.QuadPart % 10000000ULL) / 10);
     return 0;
+}
+
+/* System-action lifecycle adapted from Slime Volley ports/nxdk/Platform.c,
+ * 65c86911fe5ab199e7853886af7c71d8ad1e5085. Keep cleanup in Neverball's main.
+ */
+int xbox_exit_available(enum xbox_exit_action action)
+{
+    const char *path;
+    DWORD attributes;
+    if (action == XBOX_EXIT_REBOOT || action == XBOX_EXIT_OFF) return 1;
+    if (action != XBOX_EXIT_LAUNCHER && action != XBOX_EXIT_GAME) return 0;
+    path = action == XBOX_EXIT_LAUNCHER ? launcher : game_xbe;
+    if (!((path[0] && path[1] == ':' && path[2] == '\\') ||
+          strncmp(path, "\\Device\\", 8) == 0)) return 0;
+    /* Native current-XBE paths need the rootless NT open used by NXDK's
+     * hal/xbox.c DoesFileExist, rather than DOS-drive attribute lookup. */
+    if (strncmp(path, "\\Device\\", 8) == 0)
+    {
+        ANSI_STRING native;
+        OBJECT_ATTRIBUTES object;
+        IO_STATUS_BLOCK io;
+        HANDLE handle;
+        NTSTATUS status;
+        RtlInitAnsiString(&native, path);
+        InitializeObjectAttributes(&object, &native, OBJ_CASE_INSENSITIVE, NULL, NULL);
+        status = NtOpenFile(&handle, GENERIC_READ, &object, &io,
+                            FILE_SHARE_READ, FILE_NON_DIRECTORY_FILE);
+        if (NT_SUCCESS(status)) { NtClose(handle); return 1; }
+        printf("system: native target unavailable %s status=%08lx\n", path, status);
+        return 0;
+    }
+    attributes = GetFileAttributesA(path);
+    if (attributes == INVALID_FILE_ATTRIBUTES || (attributes & FILE_ATTRIBUTE_DIRECTORY))
+    {
+        printf("system: target unavailable %s error=%lu\n", path, GetLastError());
+        return 0;
+    }
+    return 1;
+}
+void xbox_exit_select(enum xbox_exit_action action)
+{
+    exit_action = action;
+    printf("system: selected action=%d\n", action);
+}
+void xbox_shutdown_begin(void)
+{
+    shutdown_at = GetTickCount();
+    shutting_down = 1;
+    printf("system: cleanup begin action=%d\n", exit_action);
+}
+void xbox_exit(void)
+{
+    FILE *history;
+    exit_complete = 1;
+    printf("system: cleanup complete action=%d\n", exit_action);
+    history = fopen("D:\\system-actions.log", "ab");
+    if (history)
+    {
+        fprintf(history, "action=%d cleanup=complete target=%s\n", exit_action,
+                exit_action == XBOX_EXIT_LAUNCHER ? launcher :
+                exit_action == XBOX_EXIT_GAME ? game_xbe : "system");
+        fclose(history);
+    }
+    fflush(NULL);
+    if (exit_action == XBOX_EXIT_LAUNCHER) XLaunchXBE(launcher);
+    else if (exit_action == XBOX_EXIT_GAME) XLaunchXBE(game_xbe);
+    else if (exit_action == XBOX_EXIT_OFF)
+    {
+        NTSTATUS status = HalWriteSMBusValue(0x20, 0x02, FALSE, 0x80);
+        printf("system: power off request status=%08lx\n", status);
+        fflush(NULL);
+        if (NT_SUCCESS(status)) for (;;) Sleep(1000);
+    }
+    /* Firmware reboot is also the recovery path if a launch request returns. */
+    XReboot();
 }
