@@ -346,6 +346,12 @@ int video_mode(int f, int w, int h)
         glEnable(GL_NORMALIZE);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
+#ifdef NXDK
+        /* Match the base stage used by geom.c for NV2A point sprites.
+         * Enabling unit 0 here leaves an unintended second texture stage. */
+        glActiveTexture(GL_TEXTURE3);
+        glClientActiveTexture(GL_TEXTURE3);
+#endif
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
 
