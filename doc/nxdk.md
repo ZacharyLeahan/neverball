@@ -119,6 +119,14 @@ The existing known-good installation at `/F/neverball-nxdk` must remain intact.
 That is an Xbox filesystem path, not a separate repository. Use
 `/F/neverball-upstream` for test candidates.
 
+A controlled [RAM-cap comparison](hardware-testing.md#ram-diagnostics-and-controlled-64-mib-limit-comparison)
+confirmed that the XBE's existing `Limit64Megabytes` flag reduces available
+memory by about 64 MiB on the upgraded test console. Title/replay and Easy 3
+ran within that limited budget, with about 39.9 MiB sampled free. The kernel's
+128 MiB total describes installed RAM, not the effective runtime budget.
+Stock 64 MiB hardware remains untested, so release compatibility claims remain
+unchanged.
+
 Rig: Xbox FTP `192.168.1.254`, ESP KVM `http://192.168.1.169/`.
 KVM project: https://github.com/ZacharyLeahan/espkvm-xbox .
 Dashboard FTP normally disappears during gameplay. Human dashboard return or
