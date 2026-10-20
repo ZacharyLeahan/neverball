@@ -108,7 +108,9 @@ physics checks, not level completions or a performance guarantee.
 found [silent audio after relaunch](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14).
 The development driver now uses checked DMA storage and explicit teardown;
 reopen tests and a 16-level capped rerun sustained audio callbacks, with
-**21.51 MiB minimum sampled free RAM** in that rerun. An existing stalled
+**21.51 MiB minimum sampled free RAM** in that rerun. A subsequent manual Neverputt test
+with this development candidate froze after a shot (sound glitch and frozen
+screen); that failure remains under investigation in [issue #14](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14). An existing stalled
 session needed a firmware reboot before qualification. See the
 [audio results](doc/hardware-testing.md#audio-dma-storage-and-relaunch-tests)
 and [hardware ledger](doc/hardware-testing.md#expanded-capped-tests-and-startup-texture-state)
