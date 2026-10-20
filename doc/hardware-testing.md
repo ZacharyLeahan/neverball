@@ -304,3 +304,18 @@ restart and firmware reboot are physically qualified for the described
 candidates. Power-off dispatch remains unexecuted in this Neverball test; the
 confirmation and safe cancellation were exercised. No release or merge is
 part of this feature task.
+
+### Exit label follow-up verification
+
+The title entry now retains upstream's translated **Exit** label, and the
+Xbox submenu heading is **Exit**. Desktop unit tests and the exit-action
+handler sanitizer checks passed again, and the NXDK XBE build succeeded.
+Candidate SHA-256:
+`6c8b0e330d0bcc1fa237255bd57b7862444fc1d7827f6b6f7f9ceda1a5a9dd15`.
+
+The installed preceding candidate returned to XBMC through confirmed launcher
+return again. KVM capture `exit-label-status.jpg` confirmed the dashboard.
+FTP connections then repeatedly stalled during login, so the new label
+candidate has not yet been deployed or observed on hardware. A console reboot
+was requested. Earlier hardware coverage above applies to the exit actions;
+it must not be represented as hardware validation of this final XBE.

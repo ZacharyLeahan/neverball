@@ -70,7 +70,7 @@ static int exit_enter(struct state *st, struct state *prev, int intent)
     if (root)
     {
         gui_label(root, unavailable ? "Action unavailable" :
-                  confirming ? "Confirm system action" : "Exit / System",
+                  confirming ? "Confirm system action" : "Exit",
                   GUI_MED, gui_wht, gui_wht);
         gui_space(root);
         if (unavailable)

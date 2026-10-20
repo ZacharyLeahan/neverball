@@ -219,11 +219,7 @@ static int title_gui(void)
                         gui_state(kd, gt_prefix("menu^Help"), GUI_MED, TITLE_HELP, 0);
 
                     gui_state(kd, gt_prefix("menu^Options"), GUI_MED, TITLE_CONF, 0);
-#ifdef NXDK
-                    gui_state(kd, "Exit / System...", GUI_MED, GUI_BACK, 0);
-#else
                     gui_state(kd, gt_prefix("menu^Exit"), GUI_MED, GUI_BACK, 0);
-#endif
 
                     /* Hilight the start button. */
 
