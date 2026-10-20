@@ -643,3 +643,15 @@ sequence was not independently observed. Two controllers were detected in the
 latter run. Earlier accepted builds had working audio, so this is an unresolved
 regression or hardware-state problem, not evidence that all capped acceptance
 checks pass. Its relationship to the memory cap is not established.
+
+
+Restored-normal smoke check: title animation, Easy 3 selection/gameplay with
+visible coins, movement, pause/restart, Give Up, return to title and switching
+to Neverputt all rendered. Final logs at `build/hardware/20261020T213411Z/`
+record 14,299 frames, minimum 9,214 available pages (**35.9922 MiB**) and still
+zero audio callbacks. Neverputt's existing Exit path returned 0 directly and
+used the default reboot action 2; cleanup completed, the console rebooted and
+XBMC FTP returned. This is not a test of Neverball's launcher-return option.
+No user reboot was needed for this final run. Candidate fixture removal and
+normal `sets.txt` restoration were verified; no diagnostic driver remains in
+the installed XBE. Desktop unit tests, Xbox exit checks and diff checks pass.
