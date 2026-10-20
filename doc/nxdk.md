@@ -82,14 +82,12 @@ tracked changes. Submodules use the renderer's recorded revisions.
 
 ## Platform adaptation and provenance
 
-The older `ZacharyLeahan/neverball-nxdk` port
-(retired before the modern fork reused its name) is preserved in local backups; its separate known-good
-Xbox installation remains intact. Its README, development notes,
-hardware ledger, deployment/packaging tools, SDK bootstrap/patches and build
-rules informed this evaluation. It continues [JayFoxRox / Jannik Vogel's
-original port](https://github.com/JayFoxRox/neverball/tree/xbox) at `42a8be94970117c91c4ed9c54f80713256138e56`.
+This port builds on [JayFoxRox / Jannik Vogel's original Xbox port](https://github.com/JayFoxRox/neverball/tree/xbox)
+at `42a8be94970117c91c4ed9c54f80713256138e56`. Earlier hardware-tested
+platform work informed configuration parsing, audio safeguards, SDK patches,
+and deployment tools. Source commit references below preserve attribution.
 
-`share/config.c` adapts direct key/value scanning from older-port commit
+`share/config.c` adapts direct key/value scanning from platform-reference commit
 `3c59f35087f52ca39bca819e968df8bcace27f4a` (Zachary Leahan).
 The upstream parser still used `%*s`, which the tested SDK's PDCLib mishandles.
 A whole cherry-pick would pull unrelated old platform/renderer changes into
@@ -114,10 +112,12 @@ actual notices and resolve packaging requirements before a release.
 
 ## Physical hardware qualification
 
-Only the older `v0.1.0-alpha.2` is qualified on the physical 128 MiB console.
-Stock 64 MiB support remains unestablished. The known-good installation
-`/F/neverball-nxdk` must remain intact. Use `/F/neverball-upstream` for future
-modern candidates; do not copy the old deployment tool's default destination.
+The [current Xbox prerelease](https://github.com/ZacharyLeahan/neverball-nxdk/releases/tag/v0.2.0-alpha.1)
+requires a physical **128 MiB Xbox**. Stock 64 MiB support remains unestablished;
+see the hardware ledger for exact tested hashes and validation limits.
+The existing known-good installation at `/F/neverball-nxdk` must remain intact.
+That is an Xbox filesystem path, not a separate repository. Use
+`/F/neverball-upstream` for test candidates.
 
 Rig: Xbox FTP `192.168.1.254`, ESP KVM `http://192.168.1.169/`.
 KVM project: https://github.com/ZacharyLeahan/espkvm-xbox .
@@ -142,8 +142,8 @@ Initial candidate SHA-256:
 This supersedes the backend-only status above. Hardware results are recorded
 separately; a successful build is not hardware acceptance.
 
-The local SDK was copied into ignored `build/nxdk` from the older port's
-patched build, preserving its tested AC97/SDL changes without modifying it.
+The local SDK was copied into ignored `build/nxdk` from the previously
+hardware-tested patched SDK, preserving its tested AC97/SDL changes without modifying it.
 Clean SDK reproducibility remains unqualified. Renderer static libraries must
 use LLVM ar/ranlib: Apple ar/ranlib omitted the COFF symbol index and caused
 undefined GLES symbols at final link. `xbox/CMakeLists.txt` now selects LLVM.
@@ -179,7 +179,7 @@ presentation progress; recovery is not guaranteed against kernel/GPU faults.
 The development overlay is disabled. Every 300 frames stdout records free
 physical pages via MmQueryStatistics. Menu Exit requests dashboard reboot.
 
-Audio safeguards are adapted from neverball-nxdk `ed3fd13f`, incorporating
+Audio safeguards are adapted from platform-reference commit `ed3fd13f`, incorporating
 `3c59f350` and `aead2645`; modern logarithmic gain and cleanup behavior remain.
 Modern fs_read has a three-argument byte-count API, so the RAM-source read was
 adapted accordingly. Host sanitizers passed real title music and three sound
