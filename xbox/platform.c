@@ -12,6 +12,7 @@
 #include <nxdk/path.h>
 #include <nxdk/mount.h>
 #include <GLES/gl.h>
+#include <pbkit/pbkit.h>
 #include "platform.h"
 static volatile unsigned frames;
 static int initialized;
@@ -106,6 +107,11 @@ void xbox_startup(void)
 void xbox_video_init(void)
 {
     if (!initialized) {
+        /* Adventure exceeds pbkit's default 512 KiB per-frame command buffer.
+         * Configure before glContextInit calls pb_init; this costs 512 KiB more
+         * contiguous RAM and does not change the XBE's 64 MiB runtime cap. */
+        pb_size(1024 * 1024);
+        printf("gpu pushbuffer_bytes=%u\n", 1024U * 1024U);
         glContextInit(640, 480);
         glShowFPSNV2A(GL_FALSE);
         initialized = 1;
