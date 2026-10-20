@@ -14,6 +14,8 @@
 
 #include "fetch.h"
 
+unsigned long FETCH_EVENT = (unsigned long) -1;
+
 void fetch_enable(int enable)
 {
 }
