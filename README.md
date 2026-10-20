@@ -1,6 +1,25 @@
 # neverball-nxdk
 
-![Neverball](https://neverball.org/images/shots/01-neverball-easy/easy-07-01.jpg)
+> **Requires a 128 MB (128 MiB) original Xbox. Stock 64 MB consoles are not supported by this release.**
+
+**[Download the full game — v0.2.0-alpha.2 (Xbox ZIP)](https://github.com/ZacharyLeahan/neverball-nxdk/releases/download/v0.2.0-alpha.2/neverball-nxdk-v0.2.0-alpha.2-xbox-128mb.zip)**
+· [Release notes, standalone XBE, source and checksums](https://github.com/ZacharyLeahan/neverball-nxdk/releases/tag/v0.2.0-alpha.2)
+
+The full ZIP includes the tested portal-stars fix and all required game files.
+Extract the complete folder to your Xbox HDD and launch `default.xbe`; keep
+`Neverball/` and `licenses/` beside it. The standalone XBE alone is insufficient.
+
+![Neverball Easy 1 gameplay captured on a physical 128 MiB Xbox](doc/images/readme/neverball-gameplay.gif)
+
+*Neverball gameplay on the physical Xbox, captured through ESP KVM. The GIF
+is silent and reduced in size/frame rate for the README.*
+
+<details>
+<summary>Xbox title screen</summary>
+
+![Neverball title screen on the physical Xbox](doc/images/readme/neverball-title.jpg)
+
+</details>
 
 Tilt the  floor to roll a  ball through an obstacle  course within the
 given  time.  If  the  ball falls  or time  expires, a ball is lost.
