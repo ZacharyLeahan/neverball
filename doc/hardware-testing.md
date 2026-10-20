@@ -655,3 +655,116 @@ XBMC FTP returned. This is not a test of Neverball's launcher-return option.
 No user reboot was needed for this final run. Candidate fixture removal and
 normal `sets.txt` restoration were verified; no diagnostic driver remains in
 the installed XBE. Desktop unit tests, Xbox exit checks and diff checks pass.
+
+
+### Audio DMA storage and relaunch tests
+
+2026-10-20, physical 128 MiB developer Xbox, `Limit64Megabytes` enabled
+(header flags `0x5`), separate `/F/neverball-upstream` installation.
+[Issue #14](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14) tracks the
+silent-audio regression. Related NXDK reports describe
+[missing interrupts after relaunch](https://github.com/XboxDev/nxdk/issues/362)
+and [missing audio deinitialization](https://github.com/XboxDev/nxdk/issues/363).
+No stock 64 MiB console was used.
+
+After the user reported rebooting to XBMC, an unchanged bounded diagnostic produced
+806 callbacks, moving analog/digital DMA indices and varying HDMI audio.
+The identical binary repeated with another 806 callbacks. The original
+16-level driver then completed both passes with 13,542 callbacks, 48 EOFs,
+zero decode/seek errors and `loads=16 failures=0`. Its minimum sampled free
+RAM was 5,502 pages (21.4922 MiB). This established that the capped budget can
+support that audio workload, while later relaunches still exposed the fault.
+Local evidence: `20261020T215208Z`, `20261020T215323Z`,
+`20261020T220301Z` under `build/hardware/`.
+
+The controlled reopen driver closes/reopens the real SDL device at frames
+300, 600 and 900, restarts title music each time and exits at frame 1200.
+With the old driver, callbacks stopped at 63 and did not advance through any
+reopen. This repeated after successful control runs, without another reboot
+(`20261020T220414Z` and `20261020T221713Z`). A teardown-only candidate stayed
+at zero callbacks in the already-stalled state (`20261020T220548Z`).
+
+Additional controls: descriptor-base readback matched the requested physical
+address; the AC97 PCI command enabled bus mastering; PMCSR reported D0; the
+nForce S/PDIF interrupt-enable bit was set. Startup-order changes, 256-byte
+alignment, the original SDK cold reset and an AC97 warm reset did not sustain
+playback. A PCI-function D3/D0 reset produced 1,055 callbacks but left XBMC
+stuck at its startup logo and required user recovery. That reset is excluded
+from the fix. Page-contained cached and uncached global-descriptor controls
+both reached 1,055 callbacks; those controls do not isolate cache policy as
+the sole cause.
+
+The retained fix in SDK patch commit `b1b3b579` uses checked contiguous,
+uncached descriptor storage and explicit DMA/ISR/DPC teardown. It does not
+change normal desktop startup or the renderer. Its first run against the
+already-stalled state still produced zero callbacks. A bounded diagnostic
+then used the verified firmware reboot action; after XBMC returned, the fixed
+candidate completed three reopen cycles with 1,055 callbacks. An identical
+relaunch through XBMC completed with 1,056 callbacks. Both reported zero
+decode/seek errors and varying HDMI PCM. Existing stalled state required the
+reboot; subsequent relaunch qualification uses the fixed driver throughout.
+The precise hardware failure mechanism remains less certain than the observed
+relaunch behavior; validation applies to this port and console.
+
+| Diagnostic | XBE SHA-256 | Evidence under `build/hardware/` |
+| --- | --- | --- |
+| Original reopen driver, stalled at 63 | `31114a0ef3dac52299721da1e71ceff4ba44e43fa1c3f0c8bddfc2cbd4b3fe5d` | `20261020T220302Z` / `20261020T220414Z`; repeated `20261020T221605Z` / `20261020T221713Z` |
+| Page-contained cached control | `8e51da6d319e1e94f97bbabadd6d05b732df943cac8da95976a9d660acf71d4a` | `20261020T221308Z` / `20261020T221417Z` |
+| Page-contained uncached control | `98f2de50124b86e5416049588f2bad71f6cbf4b872eef216d0272e0c092991ee` | `20261020T221440Z` / `20261020T221550Z` |
+| Fixed allocation/reopen driver | `d7cb37dc60518a5c2d55bddfc749367759e90612f84cc90ec8d01b45408e893a` | first clean-state run `20261020T222217Z` / `20261020T222326Z`; identical relaunch log `20261020T222443Z` |
+
+The temporary [reopen patch](hardware-tests/audio-reopen.patch) adds diagnostic
+counters and read-only PCI observations; it ships no PCI reset. The
+[16-level audio-cycle patch](hardware-tests/64mib-ball-audio-cycle.patch) adds
+per-stage callback counts to the existing bounded physics/render driver.
+Apply one diagnostic patch at a time in an isolated Xbox worktree, build with
+the pinned SDK plus retained patches, verify the cap bit and deployed XBE by
+readback, then collect logs after automatic launcher return. Restore normal
+sources and the normal XBE afterward. The earlier diagnostic version labels
+predate the SDK-fix commit; hashes and source patches identify the tests.
+
+
+The fixed-driver 16-level rerun completed with **13,530 callbacks, 48 EOFs,
+zero decode/seek errors**, and `loads=16 failures=0`. Callback counts increased
+at every one of the 64 logged load/render/title stages. All cases painted
+gameplay frames and reported GL error 0. Minimum sampled available memory was
+5,506 pages (**21.5078 MiB**). Early, middle and late five-second HDMI captures
+contained varying audio. Pass-end title samples fell from 9,553 to 9,400
+free pages (**0.5977 MiB**), while virtual commitment fell by 196,608 bytes.
+Longer memory-drift investigation remains open. This is a bounded physics/render/audio test,
+with no level-completion or frame-rate guarantee.
+
+XBE SHA-256: `6bbdd8ae3033a858bd732d045c1b3323bcc6c3e08575f82b97557ee3783e07d8`.
+Deployment/readback: `20261020T222451Z`; final logs:
+`20261020T223025Z`. Public raw evidence:
+[original stalled reopen](hardware-tests/audio-results/original_reopen.log),
+[fixed repeated reopen](hardware-tests/audio-results/fixed_reopen.log), and
+[fixed 16-level run](hardware-tests/audio-results/fixed_ball_cycle.log).
+
+
+The following launch, using the fixed driver and refreshed code-commit version
+label, completed the six Neverputt holes and four title switches with **3,889
+callbacks, 16 EOFs and zero decode/seek errors**. Counts increased at every
+logged stage; all six holes painted stroke/roll frames and returned GL error
+0. Minimum sampled free memory was **35.4492 MiB**. XBE SHA-256:
+`eb8f18b84e2a48e2e3097dc2ff0288f88b23ddfc4cacaab8626bb5c23527027f`.
+Deployment/readback: `20261020T223133Z`; logs: `20261020T223350Z`.
+[Raw evidence](hardware-tests/audio-results/fixed_putt_cycle.log) and
+[reproducible driver](hardware-tests/64mib-putt-audio-cycle.patch).
+
+An [isolated effects driver](hardware-tests/audio-effects.patch) temporarily
+muted music, played the stock coin effect once per 60 frames from frame 300
+through 1440, restored the configured music volume at frame 1500 and returned
+to the launcher at frame 1800. It recorded **1,547 callbacks, 20 EOFs and zero
+decode/seek errors**. The 9.97-second HDMI capture contained 478,560 frames,
+peak 0.55838, RMS 0.019382 and 13,293 active frames. An AC-only RMS check also
+measured 0.019382; 89 of 100 100-ms windows were quiet, consistent with separate
+short effect bursts rather than background music masking the result.
+
+Effects XBE SHA-256:
+`ef24164a2be510eecce9240e527db8cd2a88f299c144a605da54a138c0797973`.
+Deployment/readback: `20261020T223350Z`; logs: `20261020T223508Z`.
+[Raw evidence](hardware-tests/audio-results/isolated_effects.log).
+Local PCM: `build/hardware/audio-fix/isolated-effects.wav`. The diagnostic
+changed mixer output volumes only; configured values were retained and output
+was restored before exit.

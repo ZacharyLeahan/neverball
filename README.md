@@ -103,11 +103,17 @@ and switches between both games. Minimum sampled free RAM was **21.38 MiB**;
 samples do not measure every transient peak. These were bounded rendering and
 physics checks, not level completions or a performance guarantee.
 
-**Stock 64 MB hardware remains untested.** The second Neverball pass ended with
-0.78 MiB less free memory, requiring longer investigation. The latest tests also
-found [silent audio with zero mixer callbacks](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14); audio is a failing check despite
-successful earlier builds. See the [hardware ledger](doc/hardware-testing.md#expanded-capped-tests-and-startup-texture-state)
-for exact binaries, coverage and outstanding checks.
+**Stock 64 MB hardware remains untested.** The fixed-audio Neverball rerun ended its second pass with
+0.60 MiB less free memory, requiring longer investigation. An earlier session
+found [silent audio after relaunch](https://github.com/ZacharyLeahan/neverball-nxdk/issues/14).
+The development driver now uses checked DMA storage and explicit teardown;
+reopen tests and a 16-level capped rerun sustained audio callbacks, with
+**21.51 MiB minimum sampled free RAM** in that rerun. An existing stalled
+session needed a firmware reboot before qualification. See the
+[audio results](doc/hardware-testing.md#audio-dma-storage-and-relaunch-tests)
+and [hardware ledger](doc/hardware-testing.md#expanded-capped-tests-and-startup-texture-state)
+for exact binaries, coverage and outstanding checks. The download above
+remains v0.2.0-alpha.2 and predates these development fixes.
 
 The [Adventure GPU DMA failure](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10)
 was traced to overflowing the default GPU command buffer. The fix increases

@@ -1,0 +1,46 @@
+Modern Neverball Xbox startup
+ram phase=startup frame=0 page_bytes=4096 total_pages=32768 available_pages=15634 min_available_pages=15634 virtual_committed_bytes=2596864 virtual_reserved_bytes=2596864 cache_pages=16 pool_pages=2 stack_pages=19 image_pages=617
+system: game=\Device\Harddisk0\Partition6\neverball-upstream\default.xbe launcher=E:\Dashboard\default.xbe
+startup: config_paths
+startup: log_init
+startup: make_dirs_and_migrate
+startup: SDL_Init
+startup: config_init
+startup: config_load
+startup: package_init
+startup: joy_init
+startup: lang_init
+startup: audio_init
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+startup: video_init
+gpu pushbuffer_bytes=1048576
+GLES context ready
+ram phase=graphics-ready frame=0 page_bytes=4096 total_pages=32768 available_pages=13194 min_available_pages=13194 virtual_committed_bytes=2596864 virtual_reserved_bytes=2596864 cache_pages=16 pool_pages=2 stack_pages=51 image_pages=617
+startup: mtrl_init
+startup: main_preload
+ram phase=present frame=1 page_bytes=4096 total_pages=32768 available_pages=10419 min_available_pages=10419 virtual_committed_bytes=6225920 virtual_reserved_bytes=6225920 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=617
+audio-reopen frame=300 before-close
+audio-test callbacks=63 eof=0 decode_errors=0 seek_errors=0
+audio: callbacks=63 eof=0 decode_errors=0 seek_errors=0
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+audio-reopen frame=300 reopened
+ram phase=present frame=300 page_bytes=4096 total_pages=32768 available_pages=10419 min_available_pages=10419 virtual_committed_bytes=6225920 virtual_reserved_bytes=6225920 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=617
+audio-reopen frame=600 before-close
+audio-test callbacks=63 eof=0 decode_errors=0 seek_errors=0
+audio: callbacks=63 eof=0 decode_errors=0 seek_errors=0
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+audio-reopen frame=600 reopened
+ram phase=present frame=600 page_bytes=4096 total_pages=32768 available_pages=10419 min_available_pages=10419 virtual_committed_bytes=6225920 virtual_reserved_bytes=6225920 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=617
+audio-reopen frame=900 before-close
+audio-test callbacks=63 eof=0 decode_errors=0 seek_errors=0
+audio: callbacks=63 eof=0 decode_errors=0 seek_errors=0
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+audio-reopen frame=900 reopened
+ram phase=present frame=900 page_bytes=4096 total_pages=32768 available_pages=10419 min_available_pages=10419 virtual_committed_bytes=6225920 virtual_reserved_bytes=6225920 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=617
+system: selected action=0
+ram phase=present frame=1200 page_bytes=4096 total_pages=32768 available_pages=10419 min_available_pages=10419 virtual_committed_bytes=6225920 virtual_reserved_bytes=6225920 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=617
+system: cleanup begin action=0
+ram phase=cleanup-begin frame=1200 page_bytes=4096 total_pages=32768 available_pages=10419 min_available_pages=10419 virtual_committed_bytes=6225920 virtual_reserved_bytes=6225920 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=617
+audio: callbacks=63 eof=0 decode_errors=0 seek_errors=0
+system: cleanup complete action=0
+ram phase=cleanup-complete frame=1200 page_bytes=4096 total_pages=32768 available_pages=12755 min_available_pages=10419 virtual_committed_bytes=4431872 virtual_reserved_bytes=4431872 cache_pages=16 pool_pages=4 stack_pages=35 image_pages=617
