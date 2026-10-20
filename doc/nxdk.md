@@ -82,8 +82,8 @@ tracked changes. Submodules use the renderer's recorded revisions.
 
 ## Platform adaptation and provenance
 
-The older [ZacharyLeahan/neverball-nxdk port](https://github.com/ZacharyLeahan/neverball-nxdk)
-(repository now retired) is preserved in local backups; its separate known-good
+The older `ZacharyLeahan/neverball-nxdk` port
+(retired before the modern fork reused its name) is preserved in local backups; its separate known-good
 Xbox installation remains intact. Its README, development notes,
 hardware ledger, deployment/packaging tools, SDK bootstrap/patches and build
 rules informed this evaluation. It continues [JayFoxRox / Jannik Vogel's
