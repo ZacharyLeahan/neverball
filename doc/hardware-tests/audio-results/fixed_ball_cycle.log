@@ -1,0 +1,222 @@
+Modern Neverball Xbox startup
+ram phase=startup frame=0 page_bytes=4096 total_pages=32768 available_pages=15633 min_available_pages=15633 virtual_committed_bytes=2600960 virtual_reserved_bytes=2600960 cache_pages=16 pool_pages=2 stack_pages=19 image_pages=618
+system: game=\Device\Harddisk0\Partition6\neverball-upstream\default.xbe launcher=E:\Dashboard\default.xbe
+startup: config_paths
+startup: log_init
+startup: make_dirs_and_migrate
+startup: SDL_Init
+startup: config_init
+startup: config_load
+startup: package_init
+startup: joy_init
+startup: lang_init
+startup: audio_init
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+startup: video_init
+gpu pushbuffer_bytes=1048576
+GLES context ready
+ram phase=graphics-ready frame=0 page_bytes=4096 total_pages=32768 available_pages=13192 min_available_pages=13192 virtual_committed_bytes=2600960 virtual_reserved_bytes=2600960 cache_pages=16 pool_pages=2 stack_pages=51 image_pages=618
+startup: mtrl_init
+startup: main_preload
+ram phase=present frame=1 page_bytes=4096 total_pages=32768 available_pages=10417 min_available_pages=10417 virtual_committed_bytes=6230016 virtual_reserved_bytes=6230016 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+stress load index=0 round=1 path=map-fwp/adventure.sol
+audio-test callbacks=151 eof=0 decode_errors=0 seek_errors=0
+stress phase=before-load index=0 ticks=6089 query=00000000 available_pages=10417 virtual_committed_bytes=6230016
+audio-test callbacks=643 eof=0 decode_errors=0 seek_errors=0
+stress phase=loaded index=0 ticks=16572 query=00000000 available_pages=5807 virtual_committed_bytes=14585856
+ram phase=present frame=120 page_bytes=4096 total_pages=32768 available_pages=6008 min_available_pages=6008 virtual_committed_bytes=13500416 virtual_reserved_bytes=13500416 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+stress rendered index=0 gameplay_frames=7 error=0
+audio-test callbacks=1018 eof=3 decode_errors=0 seek_errors=0
+stress phase=rendered index=0 ticks=24572 query=00000000 available_pages=5976 virtual_committed_bytes=13762560
+stress capture index=0 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=1081 eof=3 decode_errors=0 seek_errors=0
+stress phase=title-return index=0 ticks=25918 query=00000000 available_pages=10096 virtual_committed_bytes=7344128
+stress load index=1 round=1 path=map-fwp/rings.sol
+audio-test callbacks=1144 eof=3 decode_errors=0 seek_errors=0
+stress phase=before-load index=1 ticks=27255 query=00000000 available_pages=10096 virtual_committed_bytes=7344128
+audio-test callbacks=1548 eof=3 decode_errors=0 seek_errors=0
+stress phase=loaded index=1 ticks=35879 query=00000000 available_pages=6720 virtual_committed_bytes=14733312
+ram phase=present frame=300 page_bytes=4096 total_pages=32768 available_pages=6904 min_available_pages=6008 virtual_committed_bytes=14733312 virtual_reserved_bytes=14733312 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+stress rendered index=1 gameplay_frames=9 error=0
+audio-test callbacks=1926 eof=6 decode_errors=0 seek_errors=0
+stress phase=rendered index=1 ticks=43940 query=00000000 available_pages=7199 virtual_committed_bytes=13647872
+stress capture index=1 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=1989 eof=6 decode_errors=0 seek_errors=0
+stress phase=title-return index=1 ticks=45282 query=00000000 available_pages=9950 virtual_committed_bytes=7933952
+stress load index=2 round=1 path=map-fwp/confetti.sol
+audio-test callbacks=2051 eof=6 decode_errors=0 seek_errors=0
+stress phase=before-load index=2 ticks=46622 query=00000000 available_pages=9950 virtual_committed_bytes=7933952
+audio-test callbacks=2388 eof=6 decode_errors=0 seek_errors=0
+stress phase=loaded index=2 ticks=53801 query=00000000 available_pages=8642 virtual_committed_bytes=12857344
+ram phase=present frame=600 page_bytes=4096 total_pages=32768 available_pages=8811 min_available_pages=6008 virtual_committed_bytes=11902976 virtual_reserved_bytes=11902976 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+ram phase=present frame=900 page_bytes=4096 total_pages=32768 available_pages=8795 min_available_pages=6008 virtual_committed_bytes=12099584 virtual_reserved_bytes=12099584 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+stress rendered index=2 gameplay_frames=230 error=0
+audio-test callbacks=2758 eof=9 decode_errors=0 seek_errors=0
+stress phase=rendered index=2 ticks=61706 query=00000000 available_pages=8795 virtual_committed_bytes=12099584
+stress capture index=2 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=2819 eof=9 decode_errors=0 seek_errors=0
+stress phase=title-return index=2 ticks=63010 query=00000000 available_pages=9821 virtual_committed_bytes=8261632
+stress load index=3 round=1 path=map-fwp/buoys.sol
+audio-test callbacks=2883 eof=9 decode_errors=0 seek_errors=0
+stress phase=before-load index=3 ticks=64355 query=00000000 available_pages=9821 virtual_committed_bytes=8261632
+audio-test callbacks=3227 eof=9 decode_errors=0 seek_errors=0
+stress phase=loaded index=3 ticks=71709 query=00000000 available_pages=8172 virtual_committed_bytes=13332480
+ram phase=present frame=1200 page_bytes=4096 total_pages=32768 available_pages=8651 min_available_pages=6008 virtual_committed_bytes=12247040 virtual_reserved_bytes=12247040 cache_pages=16 pool_pages=8 stack_pages=51 image_pages=618
+stress rendered index=3 gameplay_frames=10 error=0
+audio-test callbacks=3648 eof=12 decode_errors=0 seek_errors=0
+stress phase=rendered index=3 ticks=80688 query=00000000 available_pages=8651 virtual_committed_bytes=12247040
+stress capture index=3 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=3709 eof=12 decode_errors=0 seek_errors=0
+stress phase=title-return index=3 ticks=81994 query=00000000 available_pages=9644 virtual_committed_bytes=8982528
+stress load index=4 round=1 path=map-fwp/inferno.sol
+audio-test callbacks=3772 eof=12 decode_errors=0 seek_errors=0
+stress phase=before-load index=4 ticks=83339 query=00000000 available_pages=9644 virtual_committed_bytes=8982528
+audio-test callbacks=4118 eof=12 decode_errors=0 seek_errors=0
+stress phase=loaded index=4 ticks=90718 query=00000000 available_pages=7726 virtual_committed_bytes=12869632
+stress rendered index=4 gameplay_frames=10 error=0
+audio-test callbacks=4524 eof=15 decode_errors=0 seek_errors=0
+stress phase=rendered index=4 ticks=99371 query=00000000 available_pages=7911 virtual_committed_bytes=11980800
+stress capture index=4 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=4586 eof=15 decode_errors=0 seek_errors=0
+stress phase=title-return index=4 ticks=100692 query=00000000 available_pages=9451 virtual_committed_bytes=9572352
+ram phase=present frame=1500 page_bytes=4096 total_pages=32768 available_pages=9451 min_available_pages=6008 virtual_committed_bytes=9572352 virtual_reserved_bytes=9572352 cache_pages=16 pool_pages=10 stack_pages=51 image_pages=618
+stress load index=5 round=1 path=map-fwp/spacetime.sol
+audio-test callbacks=4649 eof=15 decode_errors=0 seek_errors=0
+stress phase=before-load index=5 ticks=102035 query=00000000 available_pages=9451 virtual_committed_bytes=9572352
+audio-test callbacks=4968 eof=15 decode_errors=0 seek_errors=0
+stress phase=loaded index=5 ticks=108843 query=00000000 available_pages=7588 virtual_committed_bytes=13029376
+stress rendered index=5 gameplay_frames=21 error=0
+audio-test callbacks=5343 eof=18 decode_errors=0 seek_errors=0
+stress phase=rendered index=5 ticks=116839 query=00000000 available_pages=8051 virtual_committed_bytes=12140544
+stress capture index=5 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=5416 eof=18 decode_errors=0 seek_errors=0
+stress phase=title-return index=5 ticks=118394 query=00000000 available_pages=9667 virtual_committed_bytes=8683520
+stress load index=6 round=1 path=map-fwp/ufo.sol
+audio-test callbacks=5479 eof=18 decode_errors=0 seek_errors=0
+stress phase=before-load index=6 ticks=119739 query=00000000 available_pages=9667 virtual_committed_bytes=8683520
+audio-test callbacks=5759 eof=18 decode_errors=0 seek_errors=0
+stress phase=loaded index=6 ticks=125725 query=00000000 available_pages=8088 virtual_committed_bytes=13012992
+ram phase=present frame=1800 page_bytes=4096 total_pages=32768 available_pages=8088 min_available_pages=6008 virtual_committed_bytes=13012992 virtual_reserved_bytes=13012992 cache_pages=16 pool_pages=12 stack_pages=51 image_pages=618
+stress rendered index=6 gameplay_frames=11 error=0
+audio-test callbacks=6181 eof=21 decode_errors=0 seek_errors=0
+stress phase=rendered index=6 ticks=134721 query=00000000 available_pages=8056 virtual_committed_bytes=13012992
+stress capture index=6 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=6242 eof=21 decode_errors=0 seek_errors=0
+stress phase=title-return index=6 ticks=136028 query=00000000 available_pages=9554 virtual_committed_bytes=8945664
+stress load index=7 round=1 path=map-easy/coins.sol
+audio-test callbacks=6305 eof=21 decode_errors=0 seek_errors=0
+stress phase=before-load index=7 ticks=137372 query=00000000 available_pages=9554 virtual_committed_bytes=8945664
+audio-test callbacks=6352 eof=21 decode_errors=0 seek_errors=0
+stress phase=loaded index=7 ticks=138378 query=00000000 available_pages=8934 virtual_committed_bytes=10440704
+ram phase=present frame=2100 page_bytes=4096 total_pages=32768 available_pages=9118 min_available_pages=6008 virtual_committed_bytes=10440704 virtual_reserved_bytes=10440704 cache_pages=16 pool_pages=13 stack_pages=51 image_pages=618
+ram phase=present frame=2400 page_bytes=4096 total_pages=32768 available_pages=9236 min_available_pages=6008 virtual_committed_bytes=10440704 virtual_reserved_bytes=10440704 cache_pages=16 pool_pages=13 stack_pages=51 image_pages=618
+stress rendered index=7 gameplay_frames=234 error=0
+audio-test callbacks=6723 eof=24 decode_errors=0 seek_errors=0
+stress phase=rendered index=7 ticks=146289 query=00000000 available_pages=9236 virtual_committed_bytes=10440704
+stress capture index=7 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=6784 eof=24 decode_errors=0 seek_errors=0
+stress phase=title-return index=7 ticks=147586 query=00000000 available_pages=9553 virtual_committed_bytes=8945664
+stress load index=8 round=2 path=map-fwp/adventure.sol
+audio-test callbacks=6847 eof=24 decode_errors=0 seek_errors=0
+stress phase=before-load index=8 ticks=148923 query=00000000 available_pages=9553 virtual_committed_bytes=8945664
+audio-test callbacks=7341 eof=24 decode_errors=0 seek_errors=0
+stress phase=loaded index=8 ticks=159459 query=00000000 available_pages=5538 virtual_committed_bytes=14868480
+ram phase=present frame=2580 page_bytes=4096 total_pages=32768 available_pages=5538 min_available_pages=5538 virtual_committed_bytes=14868480 virtual_reserved_bytes=14868480 cache_pages=16 pool_pages=14 stack_pages=51 image_pages=618
+stress rendered index=8 gameplay_frames=7 error=0
+audio-test callbacks=7715 eof=27 decode_errors=0 seek_errors=0
+stress phase=rendered index=8 ticks=167439 query=00000000 available_pages=5506 virtual_committed_bytes=14868480
+stress capture index=8 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=7777 eof=27 decode_errors=0 seek_errors=0
+stress phase=title-return index=8 ticks=168776 query=00000000 available_pages=9504 virtual_committed_bytes=8945664
+ram phase=present frame=2700 page_bytes=4096 total_pages=32768 available_pages=9504 min_available_pages=5538 virtual_committed_bytes=8945664 virtual_reserved_bytes=8945664 cache_pages=16 pool_pages=14 stack_pages=51 image_pages=618
+stress load index=9 round=2 path=map-fwp/rings.sol
+audio-test callbacks=7840 eof=27 decode_errors=0 seek_errors=0
+stress phase=before-load index=9 ticks=170118 query=00000000 available_pages=9504 virtual_committed_bytes=8945664
+audio-test callbacks=8245 eof=27 decode_errors=0 seek_errors=0
+stress phase=loaded index=9 ticks=178749 query=00000000 available_pages=6522 virtual_committed_bytes=14721024
+stress rendered index=9 gameplay_frames=10 error=0
+audio-test callbacks=8662 eof=30 decode_errors=0 seek_errors=0
+stress phase=rendered index=9 ticks=187654 query=00000000 available_pages=6736 virtual_committed_bytes=14721024
+stress capture index=9 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=8724 eof=30 decode_errors=0 seek_errors=0
+stress phase=title-return index=9 ticks=188980 query=00000000 available_pages=9982 virtual_committed_bytes=6979584
+stress load index=10 round=2 path=map-fwp/confetti.sol
+audio-test callbacks=8787 eof=30 decode_errors=0 seek_errors=0
+stress phase=before-load index=10 ticks=190322 query=00000000 available_pages=9982 virtual_committed_bytes=6979584
+audio-test callbacks=9124 eof=30 decode_errors=0 seek_errors=0
+stress phase=loaded index=10 ticks=197498 query=00000000 available_pages=8412 virtual_committed_bytes=12976128
+ram phase=present frame=3000 page_bytes=4096 total_pages=32768 available_pages=8412 min_available_pages=5538 virtual_committed_bytes=12976128 virtual_reserved_bytes=12976128 cache_pages=16 pool_pages=16 stack_pages=51 image_pages=618
+ram phase=present frame=3300 page_bytes=4096 total_pages=32768 available_pages=8380 min_available_pages=5538 virtual_committed_bytes=12976128 virtual_reserved_bytes=12976128 cache_pages=16 pool_pages=16 stack_pages=51 image_pages=618
+stress rendered index=10 gameplay_frames=231 error=0
+audio-test callbacks=9494 eof=33 decode_errors=0 seek_errors=0
+stress phase=rendered index=10 ticks=205389 query=00000000 available_pages=8380 virtual_committed_bytes=12976128
+stress capture index=10 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=9555 eof=33 decode_errors=0 seek_errors=0
+stress phase=title-return index=10 ticks=206694 query=00000000 available_pages=9837 virtual_committed_bytes=7372800
+stress load index=11 round=2 path=map-fwp/buoys.sol
+audio-test callbacks=9618 eof=33 decode_errors=0 seek_errors=0
+stress phase=before-load index=11 ticks=208039 query=00000000 available_pages=9837 virtual_committed_bytes=7372800
+audio-test callbacks=9963 eof=33 decode_errors=0 seek_errors=0
+stress phase=loaded index=11 ticks=215409 query=00000000 available_pages=7977 virtual_committed_bytes=13307904
+ram phase=present frame=3600 page_bytes=4096 total_pages=32768 available_pages=8159 min_available_pages=5538 virtual_committed_bytes=13307904 virtual_reserved_bytes=13307904 cache_pages=16 pool_pages=17 stack_pages=51 image_pages=618
+stress rendered index=11 gameplay_frames=10 error=0
+audio-test callbacks=10377 eof=36 decode_errors=0 seek_errors=0
+stress phase=rendered index=11 ticks=224236 query=00000000 available_pages=8191 virtual_committed_bytes=13307904
+stress capture index=11 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=10439 eof=36 decode_errors=0 seek_errors=0
+stress phase=title-return index=11 ticks=225559 query=00000000 available_pages=9692 virtual_committed_bytes=7962624
+stress load index=12 round=2 path=map-fwp/inferno.sol
+audio-test callbacks=10502 eof=36 decode_errors=0 seek_errors=0
+stress phase=before-load index=12 ticks=226903 query=00000000 available_pages=9692 virtual_committed_bytes=7962624
+audio-test callbacks=10848 eof=36 decode_errors=0 seek_errors=0
+stress phase=loaded index=12 ticks=234292 query=00000000 available_pages=7522 virtual_committed_bytes=12881920
+ram phase=present frame=3900 page_bytes=4096 total_pages=32768 available_pages=7490 min_available_pages=5538 virtual_committed_bytes=12881920 virtual_reserved_bytes=12881920 cache_pages=16 pool_pages=19 stack_pages=51 image_pages=618
+stress rendered index=12 gameplay_frames=10 error=0
+audio-test callbacks=11251 eof=39 decode_errors=0 seek_errors=0
+stress phase=rendered index=12 ticks=242872 query=00000000 available_pages=7490 virtual_committed_bytes=12881920
+stress capture index=12 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=11312 eof=39 decode_errors=0 seek_errors=0
+stress phase=title-return index=12 ticks=244193 query=00000000 available_pages=9611 virtual_committed_bytes=8093696
+stress load index=13 round=2 path=map-fwp/spacetime.sol
+audio-test callbacks=11376 eof=39 decode_errors=0 seek_errors=0
+stress phase=before-load index=13 ticks=245539 query=00000000 available_pages=9611 virtual_committed_bytes=8093696
+audio-test callbacks=11679 eof=39 decode_errors=0 seek_errors=0
+stress phase=loaded index=13 ticks=252007 query=00000000 available_pages=7376 virtual_committed_bytes=13074432
+stress rendered index=13 gameplay_frames=21 error=0
+audio-test callbacks=12050 eof=42 decode_errors=0 seek_errors=0
+stress phase=rendered index=13 ticks=259922 query=00000000 available_pages=7622 virtual_committed_bytes=13074432
+stress capture index=13 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=12122 eof=42 decode_errors=0 seek_errors=0
+stress phase=title-return index=13 ticks=261461 query=00000000 available_pages=9185 virtual_committed_bytes=9834496
+ram phase=present frame=4200 page_bytes=4096 total_pages=32768 available_pages=9185 min_available_pages=5538 virtual_committed_bytes=9834496 virtual_reserved_bytes=9834496 cache_pages=16 pool_pages=20 stack_pages=51 image_pages=618
+stress load index=14 round=2 path=map-fwp/ufo.sol
+audio-test callbacks=12185 eof=42 decode_errors=0 seek_errors=0
+stress phase=before-load index=14 ticks=262802 query=00000000 available_pages=9185 virtual_committed_bytes=9834496
+audio-test callbacks=12471 eof=42 decode_errors=0 seek_errors=0
+stress phase=loaded index=14 ticks=268921 query=00000000 available_pages=7829 virtual_committed_bytes=13250560
+stress rendered index=14 gameplay_frames=11 error=0
+audio-test callbacks=12861 eof=45 decode_errors=0 seek_errors=0
+stress phase=rendered index=14 ticks=277222 query=00000000 available_pages=8062 virtual_committed_bytes=12165120
+stress capture index=14 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=12922 eof=45 decode_errors=0 seek_errors=0
+stress phase=title-return index=14 ticks=278524 query=00000000 available_pages=9401 virtual_committed_bytes=8749056
+stress load index=15 round=2 path=map-easy/coins.sol
+audio-test callbacks=12985 eof=45 decode_errors=0 seek_errors=0
+stress phase=before-load index=15 ticks=279870 query=00000000 available_pages=9401 virtual_committed_bytes=8749056
+audio-test callbacks=13032 eof=45 decode_errors=0 seek_errors=0
+stress phase=loaded index=15 ticks=280875 query=00000000 available_pages=8781 virtual_committed_bytes=10244096
+ram phase=present frame=4500 page_bytes=4096 total_pages=32768 available_pages=8965 min_available_pages=5538 virtual_committed_bytes=10244096 virtual_reserved_bytes=10244096 cache_pages=16 pool_pages=22 stack_pages=51 image_pages=618
+ram phase=present frame=4800 page_bytes=4096 total_pages=32768 available_pages=9083 min_available_pages=5538 virtual_committed_bytes=10244096 virtual_reserved_bytes=10244096 cache_pages=16 pool_pages=22 stack_pages=51 image_pages=618
+stress rendered index=15 gameplay_frames=235 error=0
+audio-test callbacks=13403 eof=48 decode_errors=0 seek_errors=0
+stress phase=rendered index=15 ticks=288786 query=00000000 available_pages=9083 virtual_committed_bytes=10244096
+stress capture index=15 rows=480 width=640 height=480 pitch=2560
+audio-test callbacks=13464 eof=48 decode_errors=0 seek_errors=0
+stress phase=title-return index=15 ticks=290086 query=00000000 available_pages=9400 virtual_committed_bytes=8749056
+stress complete loads=16 failures=0
+system: selected action=0
+system: cleanup begin action=0
+ram phase=cleanup-begin frame=5027 page_bytes=4096 total_pages=32768 available_pages=9400 min_available_pages=5538 virtual_committed_bytes=8749056 virtual_reserved_bytes=8749056 cache_pages=16 pool_pages=22 stack_pages=51 image_pages=618
+audio: callbacks=13530 eof=48 decode_errors=0 seek_errors=0
+system: cleanup complete action=0
+ram phase=cleanup-complete frame=5027 page_bytes=4096 total_pages=32768 available_pages=11856 min_available_pages=5538 virtual_committed_bytes=8040448 virtual_reserved_bytes=8040448 cache_pages=16 pool_pages=22 stack_pages=35 image_pages=618

@@ -222,3 +222,38 @@ The subsequent `codex/xbox-exit-menu` change replaces immediate Xbox title-menu
 exit with an Xbox-only system menu following the Slime Volley port. See
 [Exit / System](xbox-exit-menu.md) for actions, launcher configuration, cleanup,
 provenance and validation. Desktop exit behavior remains unchanged.
+
+
+## AC97 DMA storage and teardown
+
+The development [NXDK](https://github.com/XboxDev/nxdk) build additionally applies
+[`ac97-dma-storage.patch`](../xbox/patches/ac97-dma-storage.patch) and
+[`sdl-audio-deinit.patch`](../xbox/patches/sdl-audio-deinit.patch).
+Run `sh scripts/bootstrap-xbox-sdk.sh` before rebuilding. The bootstrap now
+checks each retained patch on existing SDK checkouts as well as fresh ones:
+an already-applied patch is skipped; a conflicting source tree fails the
+check before that patch is applied. Its pinned SDK/SDL revisions are unchanged.
+
+The HAL allocates the AC97 descriptor/device block as page-aligned,
+physically contiguous, uncached memory below 64 MiB. Allocation and interrupt
+connection failures propagate to SDL instead of reporting an opened device.
+`XAudioInit` now returns zero on success or -1 on failure. Existing callers may
+ignore the return value; this port's SDL backend checks it.
+
+`XAudioShutdown` stops/resets both DMA engines, disables their interrupt
+sources, disconnects the ISR and removes a queued DPC before releasing the
+DMA allocation. SDL calls it before freeing playback buffers/semaphores.
+This replaces closing the device by calling `XAudioInit` again and resetting
+an already-connected interrupt object. The old implementation pinned a
+cached global descriptor block and did not pair its pin with an unlock.
+
+These are local changes to the pinned NXDK HAL and [SDL backend](https://github.com/XboxDev/nxdk-sdl). Their MIT/SDL
+licenses and original contributor notices, including Jannik Vogel's work,
+remain in the patched files. The existing AC97 ready-link, SDL shutdown-wait
+and buffer-headroom patches are retained. No renderer-register workaround,
+renderer revision change or gl4es dependency is involved.
+
+See the [audio hardware results](hardware-testing.md#audio-dma-storage-and-relaunch-tests)
+for exact XBE hashes, control experiments and limitations. An already-stalled
+session left by the old driver required a firmware reboot before qualification;
+the new allocation/teardown did not recover that existing state in place.

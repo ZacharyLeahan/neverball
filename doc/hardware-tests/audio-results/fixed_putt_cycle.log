@@ -1,0 +1,86 @@
+Modern Neverball Xbox startup
+ram phase=startup frame=0 page_bytes=4096 total_pages=32768 available_pages=15633 min_available_pages=15633 virtual_committed_bytes=2600960 virtual_reserved_bytes=2600960 cache_pages=16 pool_pages=2 stack_pages=19 image_pages=618
+system: game=\Device\Harddisk0\Partition6\neverball-upstream\default.xbe launcher=E:\Dashboard\default.xbe
+startup: config_paths
+startup: log_init
+startup: make_dirs_and_migrate
+startup: SDL_Init
+startup: config_init
+startup: config_load
+startup: package_init
+startup: joy_init
+startup: lang_init
+startup: audio_init
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+startup: video_init
+gpu pushbuffer_bytes=1048576
+GLES context ready
+ram phase=graphics-ready frame=0 page_bytes=4096 total_pages=32768 available_pages=13192 min_available_pages=13192 virtual_committed_bytes=2600960 virtual_reserved_bytes=2600960 cache_pages=16 pool_pages=2 stack_pages=51 image_pages=618
+startup: mtrl_init
+startup: main_preload
+audio-test callbacks=265 eof=0 decode_errors=0 seek_errors=0
+putt-test phase=loaded index=1 ticks=8512 query=00000000 available_pages=9075 committed=10989568
+ram phase=present frame=1 page_bytes=4096 total_pages=32768 available_pages=9075 min_available_pages=9075 virtual_committed_bytes=10989568 virtual_reserved_bytes=10989568 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+putt-test stroke index=1 stroke_frames=57
+putt-test rendered index=1 roll_frames=71 error=0
+audio-test callbacks=683 eof=0 decode_errors=0 seek_errors=0
+putt-test phase=rendered index=1 ticks=17438 query=00000000 available_pages=9101 committed=10989568
+putt-test capture index=1 rows=480
+audio-test callbacks=859 eof=0 decode_errors=0 seek_errors=0
+putt-test phase=loaded index=2 ticks=21189 query=00000000 available_pages=9286 committed=11001856
+ram phase=present frame=300 page_bytes=4096 total_pages=32768 available_pages=9924 min_available_pages=9075 virtual_committed_bytes=8388608 virtual_reserved_bytes=8388608 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+putt-test stroke index=2 stroke_frames=41
+putt-test rendered index=2 roll_frames=52 error=0
+audio-test callbacks=1275 eof=2 decode_errors=0 seek_errors=0
+putt-test phase=rendered index=2 ticks=30055 query=00000000 available_pages=9924 committed=8388608
+putt-test capture index=2 rows=480
+audio-test callbacks=1472 eof=2 decode_errors=0 seek_errors=0
+putt-test phase=loaded index=3 ticks=34253 query=00000000 available_pages=9119 committed=10035200
+ram phase=present frame=600 page_bytes=4096 total_pages=32768 available_pages=9510 min_available_pages=9075 virtual_committed_bytes=8540160 virtual_reserved_bytes=8540160 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+putt-test stroke index=3 stroke_frames=51
+putt-test rendered index=3 roll_frames=87 error=0
+audio-test callbacks=1890 eof=15 decode_errors=0 seek_errors=0
+putt-test phase=rendered index=3 ticks=43172 query=00000000 available_pages=9536 committed=8540160
+putt-test capture index=3 rows=480
+audio-test callbacks=2038 eof=15 decode_errors=0 seek_errors=0
+putt-test phase=loaded index=4 ticks=46332 query=00000000 available_pages=9421 committed=10825728
+ram phase=present frame=900 page_bytes=4096 total_pages=32768 available_pages=9834 min_available_pages=9075 virtual_committed_bytes=9134080 virtual_reserved_bytes=9134080 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+putt-test stroke index=4 stroke_frames=63
+ram phase=present frame=1200 page_bytes=4096 total_pages=32768 available_pages=9828 min_available_pages=9075 virtual_committed_bytes=9134080 virtual_reserved_bytes=9134080 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+putt-test rendered index=4 roll_frames=44 error=0
+audio-test callbacks=2454 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=rendered index=4 ticks=55205 query=00000000 available_pages=9834 committed=9134080
+putt-test capture index=4 rows=480
+audio-test callbacks=2581 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=loaded index=5 ticks=57920 query=00000000 available_pages=9438 committed=10956800
+ram phase=present frame=1500 page_bytes=4096 total_pages=32768 available_pages=10128 min_available_pages=9075 virtual_committed_bytes=8343552 virtual_reserved_bytes=8343552 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+putt-test stroke index=5 stroke_frames=106
+putt-test rendered index=5 roll_frames=137 error=0
+audio-test callbacks=2997 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=rendered index=5 ticks=66789 query=00000000 available_pages=10128 committed=8343552
+putt-test capture index=5 rows=480
+audio-test callbacks=3041 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=loaded index=6 ticks=67727 query=00000000 available_pages=10069 committed=9838592
+ram phase=present frame=1800 page_bytes=4096 total_pages=32768 available_pages=10482 min_available_pages=9075 virtual_committed_bytes=8146944 virtual_reserved_bytes=8146944 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+putt-test stroke index=6 stroke_frames=120
+ram phase=present frame=2100 page_bytes=4096 total_pages=32768 available_pages=10508 min_available_pages=9075 virtual_committed_bytes=8146944 virtual_reserved_bytes=8146944 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+putt-test rendered index=6 roll_frames=218 error=0
+audio-test callbacks=3457 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=rendered index=6 ticks=76604 query=00000000 available_pages=10508 committed=8146944
+putt-test capture index=6 rows=480
+audio-test callbacks=3497 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=putt-title index=6 ticks=77458 query=00000000 available_pages=10355 committed=8146944
+audio-test callbacks=3609 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=ball-title index=6 ticks=79843 query=00000000 available_pages=9810 committed=6651904
+ram phase=present frame=2400 page_bytes=4096 total_pages=32768 available_pages=9970 min_available_pages=9075 virtual_committed_bytes=6651904 virtual_reserved_bytes=6651904 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+audio-test callbacks=3708 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=putt-title index=6 ticks=81959 query=00000000 available_pages=9494 committed=7913472
+audio-test callbacks=3808 eof=16 decode_errors=0 seek_errors=0
+putt-test phase=ball-title index=6 ticks=84114 query=00000000 available_pages=9803 committed=6651904
+putt-test complete holes=6
+system: selected action=0
+system: cleanup begin action=0
+ram phase=cleanup-begin frame=2626 page_bytes=4096 total_pages=32768 available_pages=9963 min_available_pages=9075 virtual_committed_bytes=6651904 virtual_reserved_bytes=6651904 cache_pages=16 pool_pages=8 stack_pages=51 image_pages=618
+audio: callbacks=3889 eof=16 decode_errors=0 seek_errors=0
+system: cleanup complete action=0
+ram phase=cleanup-complete frame=2626 page_bytes=4096 total_pages=32768 available_pages=12358 min_available_pages=9075 virtual_committed_bytes=5943296 virtual_reserved_bytes=5943296 cache_pages=16 pool_pages=8 stack_pages=35 image_pages=618
