@@ -61,9 +61,24 @@
 #include "st_start.h"
 #include "st_package.h"
 #include "st_game_link.h"
+#include "../putt/st_all.h"
+#include "../putt/hole.h"
+#include "../putt/course.h"
 
-const char TITLE[] = "Neverball";
-const char ICON[] = "icon/neverball.png";
+#ifndef GAME_DEFAULT
+#define GAME_DEFAULT GAME_BALL
+#endif
+
+#ifndef GAME_TITLE
+#define GAME_TITLE "Neverball"
+#endif
+
+#ifndef GAME_ICON
+#define GAME_ICON "icon/neverball.png"
+#endif
+
+const char TITLE[] = GAME_TITLE;
+const char ICON[] = GAME_ICON;
 
 /*---------------------------------------------------------------------------*/
 
@@ -71,10 +86,13 @@ static char *opt_data;
 static char *opt_replay;
 static char *opt_level;
 static char *opt_link;
+static enum game opt_game = GAME_DEFAULT;
 
 #define opt_usage                                                     \
     "Usage: %s [options ...]\n"                                       \
     "Options:\n"                                                      \
+    "      --putt                launch Neverputt\n"                  \
+    "      --ball                launch Neverball\n"                  \
     "  -h, --help                show this usage message.\n"          \
     "  -v, --version             show version.\n"                     \
     "  -d, --data <dir>          use 'dir' as game data directory.\n" \
@@ -148,6 +166,19 @@ static void opt_init(int argc, char **argv)
             opt_link = argv[++i];
             continue;
         }
+
+        if (strcmp(argv[i], "--putt") == 0)
+        {
+            opt_game = GAME_PUTT;
+            continue;
+        }
+
+        if (strcmp(argv[i], "--ball") == 0)
+        {
+            opt_game = GAME_BALL;
+            continue;
+        }
+
 
         /* Perform magic on a single unrecognized argument. */
 
@@ -423,6 +454,43 @@ static int cmp_available_packages(const void *A, const void *B)
             return a_index - b_index;
     }
 
+    const int a_is_course = strcmp(a->type, "course") == 0;
+    const int b_is_course = strcmp(b->type, "course") == 0;
+
+    // Courses come after level sets.
+
+    if (a_is_course && !b_is_course)
+        return -1;
+
+    if (b_is_course && !a_is_course)
+        return +1;
+
+    if (a_is_course && b_is_course)
+    {
+        const char *a_sub = strchr(a->id, '-');
+        const char *b_sub = strchr(b->id, '-');
+
+        if (a_sub && b_sub)
+        {
+            STRBUF a_name = joinstr("holes-", a_sub + 1);
+            STRBUF b_name = joinstr("holes-", b_sub + 1);
+            STRBUF a_file = joinstr(CSTR(a_name), ".txt");
+            STRBUF b_file = joinstr(CSTR(b_name), ".txt");
+
+            int a_index = course_bundle_index(CSTR(a_file));
+            int b_index = course_bundle_index(CSTR(b_file));
+
+            if (a_index >= 0 && b_index < 0)
+                return -1;
+
+            if (b_index >= 0 && a_index < 0)
+                return +1;
+
+            if (a_index >= 0 && b_index >= 0)
+                return a_index - b_index;
+        }
+    }
+
     // Rest are ordered by id (e.g., "set-mym").
 
     return SDL_strcasecmp(a->id, b->id);
@@ -442,9 +510,10 @@ static void main_preload(struct state *start_state)
 
     goto_state(&st_loading);
 
-    /* To sort packages by sets.txt order, sets must be loaded first. */
+    /* To sort packages by sets.txt / courses.txt order, metadata must be loaded first. */
 
     set_init();
+    course_init();
 
     /* Link processing works best with a package list. */
 
@@ -468,6 +537,14 @@ static void main_preload(struct state *start_state)
 }
 
 /*---------------------------------------------------------------------------*/
+
+static void goto_pause(void)
+{
+    if (config_putt())
+        goto_putt_pause(&st_putt_over);
+    else
+        goto_state(&st_pause);
+}
 
 static int loop(void)
 {
@@ -517,7 +594,7 @@ static int loop(void)
 
                 case USER_EVENT_PAUSE:
                     if (video_get_grab())
-                        goto_state(&st_pause);
+                        goto_pause();
                     break;
             }
             break;
@@ -570,7 +647,7 @@ static int loop(void)
             {
             case SDL_WINDOWEVENT_FOCUS_LOST:
                 if (video_get_grab())
-                    goto_state(&st_pause);
+                    goto_pause();
                 break;
 
             case SDL_WINDOWEVENT_MOVED:
@@ -772,6 +849,31 @@ static int handle_installed_action(int pi)
 
         return index >= 0 ? goto_start(index, &st_package) : 1;
     }
+    else if (pi >= 0 && strcmp(package_get_type(pi), "course") == 0)
+    {
+        const char *package_id = package_get_id(pi);
+        const char *name = strchr(package_id, '-');
+
+        if (name)
+        {
+            STRBUF course_name = joinstr("holes-", name + 1);
+            STRBUF file = joinstr(CSTR(course_name), ".txt");
+            int index;
+
+            config_set_d(CONFIG_GAME, GAME_PUTT);
+            course_init();
+
+            index = course_find(CSTR(file));
+
+            if (index >= 0)
+            {
+                course_goto(index);
+                return goto_state(&st_putt_party);
+            }
+
+            return goto_state(&st_putt_title);
+        }
+    }
 
     return 1;
 }
@@ -841,6 +943,8 @@ static int main_init(int argc, char *argv[])
         return 0;
     }
 
+    srand((unsigned int) time(NULL));
+
     opt_init(argc, argv);
 
 #ifdef NXDK
@@ -881,6 +985,10 @@ static int main_init(int argc, char *argv[])
     printf("startup: config_load\n");
 #endif
     config_load();
+
+    /* Force game at runtime. */
+
+    config_set_d(CONFIG_GAME, opt_game);
 
     fetch_enable(config_get_d(CONFIG_ONLINE));
 
@@ -983,6 +1091,9 @@ int main(int argc, char *argv[])
 
     /* Screen states. */
 
+    if (config_putt())
+        start_state = &st_putt_title;
+
     init_state(&st_null);
 
     /* Initialize demo playback or load the level. */
@@ -996,10 +1107,27 @@ int main(int argc, char *argv[])
     {
         const char *path = fs_resolve(opt_level);
 
-        if (goto_level(path))
-            start_state = &st_level;
+        if (config_putt())
+        {
+            if (path)
+            {
+                hole_init(NULL);
+
+                if (hole_load(0, path) &&
+                    hole_load(1, path) &&
+                    hole_goto(1, 1))
+                {
+                    start_state = &st_putt_next;
+                }
+            }
+        }
         else
-            log_printf("File %s is not in game path\n", opt_level);
+        {
+            if (goto_level(path))
+                start_state = &st_level;
+            else
+                log_printf("File %s is not in game path\n", opt_level);
+        }
     }
 
 #ifdef NXDK

@@ -333,3 +333,27 @@ Logs: `build/hardware/20261020T143428Z/`. Captures:
 `exit-label-final-confirm.jpg`, `exit-label-final-cancel.jpg`, and
 `exit-label-final-dashboard.jpg`. This resolves the final-label deployment
 blocker. The console was left in XBMC. Actual power-off remains untested.
+
+### Upstream shared Neverball/Neverputt executable sync
+
+Integrated upstream `86bbf940e14a5a1f26e7aa7172d3e7f6938a3a1b` (26 commits
+since the original port baseline). The merge applied cleanly; Makefile.nxdk
+now includes upstream's five shared Neverputt sources. NXDK build, desktop
+unit suite and exit-handler sanitizer checks passed. Exact tested XBE:
+`298d4c4230ef66bef5771461665660809ebc3970f3cf13e1ca3e4fdfb662a2cb`.
+Deployment/read-back: `build/hardware/20261020T151608Z/`.
+
+On the physical 128 MiB Xbox, ESP controller tests reached Neverputt course
+selection and hole 1, exercised analog/button input and pause/quit, switched
+back to Neverball, loaded Easy 3, moved the ball, paused/restarted and gave up
+back to level selection. Captures `upstream-sync-easy3-gameplay.jpg` and
+`upstream-sync-easy3-movement.jpg` show visible coins and changed ball/camera
+position. This is a smoke test, not a level completion or earned unlock.
+A five-second hardware PCM observation reported 4.975 seconds of audio,
+RMS 0.04464, with sound detected. It does not qualify subjective audio quality
+or long-duration stability. All testing remained on physical 128 MiB hardware;
+64 MiB support remains unverified. The pre-sync accepted XBE was retained at
+`build/releases/tested-baseline/default.xbe` before candidate deployment.
+Confirmed launcher return recovered XBMC FTP. Collected logs at
+`build/hardware/20261020T152340Z/` report 20,318 audio callbacks, 33 EOFs,
+zero decode/seek errors, and completed cleanup for launcher action 0.
