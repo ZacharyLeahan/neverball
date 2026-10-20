@@ -218,3 +218,22 @@ Remaining: clean SDK/binary reproducibility; standard 64 MiB hardware support;
 subjective AV quality/latency feedback; longer and broader level/replay stress;
 full license/distribution audit; general save persistence and disc installs;
 watchdog recovery under failures. No release published or master merged.
+
+
+### Physical local acceptance — 2026-10-20
+
+The same verified XBE was launched from `/F/neverball-upstream` for the user's
+local test. Fresh capture `build/hardware/local-test-launch.jpg` showed the
+modern title scene. The user subsequently confirmed: “Works great locally”,
+with Easy 3 playable, coins looking right, and controls, music and effects all
+working. This provides physical local acceptance of those checks on the
+128 MiB console and supersedes the pending subjective AV confirmation above.
+It does not establish extended stability, a latency measurement, stock 64 MiB
+support, or a completed Easy-3 run. The Easy-3 test unlock remains documented.
+The game was left running for the user's test; the earlier XBMC state is historical.
+
+Accepted XBE SHA-256:
+`8b92b320791d87d5cc1af6d9c8a9a777ba70b5282fbd0c9ead5006b7f3eceb42`.
+
+The user requested committing and pushing the migration branch. No release
+publication or merge to master was requested.

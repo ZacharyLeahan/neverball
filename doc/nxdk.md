@@ -5,7 +5,9 @@ Current hardware candidate: `8b92b320791d87d5cc1af6d9c8a9a777ba70b5282fbd0c9ead5
 The full modern game builds and boots on the physical 128 MiB Xbox with
 direct nxdk-gles11. Menu/controller operation, Easy 1 and Easy 3 gameplay/coin collection, automatic
 title replay, repeated restarts and menu Exit have been observed. Easy 3
-access uses a backed-up unlocked-only test save. See [the hardware ledger](hardware-testing.md) for
+access uses a backed-up unlocked-only test save. The user subsequently confirmed
+local Easy-3 playability, correct coins, controls, music and effects on this
+128 MiB console; see the ledger for the accepted XBE hash. See [the hardware ledger](hardware-testing.md) for
 exact qualification and remaining checks. No emulator, release or master merge.
 
 The sections below retain the initial evaluation and subsequent bring-up

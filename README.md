@@ -10,11 +10,34 @@ worth 5.  Blue coins are worth 10.  A ball is awarded for 100 coins.
 
 ## Original Xbox development
 
-The modern upstream Xbox migration uses NXDK and Ryzee119's nxdk-gles11.
+The modern game runs on a physical **128 MiB original Xbox** using NXDK and
+Ryzee119's nxdk-gles11. Local hardware testing confirmed playable Easy level 3,
+correct coin rendering, responsive controls, music and effects. Automatic title
+replay and repeated restarts were also observed. **64 MiB support is unverified.**
+Easy 3 access in the isolated test installation uses a backed-up test unlock;
+this is not a claim of earned progression or level completion.
+
 See [build and port notes](doc/nxdk.md) and the
-[physical hardware ledger](doc/hardware-testing.md) for current status.
-This continues JayFoxRox/Jannik Vogel's original port and the separate
-[neverball-nxdk reference](https://github.com/ZacharyLeahan/neverball-nxdk).
+[physical hardware ledger](doc/hardware-testing.md) for commands, dependency
+pins, exact tested XBE hashes and remaining limitations.
+
+### Source and reference repositories
+
+* [This modern continuation](https://github.com/ZacharyLeahan/neverball).
+* [Original Neverball upstream](https://github.com/Neverball/neverball) and
+  [Neverball contributors](doc/authors.txt): game, engine, levels and assets.
+* [Working older Xbox port](https://github.com/ZacharyLeahan/neverball-nxdk):
+  the separate hardware-tested platform reference and its existing releases.
+* [JayFoxRox / Jannik Vogel's original Xbox port](https://github.com/JayFoxRox/neverball/tree/xbox):
+  original Xbox/NXDK port authorship and the foundation of the older continuation.
+* [Ryzee119/nxdk-gles11](https://github.com/Ryzee119/nxdk-gles11): the direct
+  OpenGL ES renderer used by this migration.
+* [XboxDev/NXDK](https://github.com/XboxDev/nxdk): toolchain, runtime and pbkit.
+* [ESP KVM Xbox project](https://github.com/ZacharyLeahan/espkvm-xbox): physical
+  video/audio capture and remote controller testing.
+
+Inherited code retains its original notices; adaptations and source commits
+are credited in the port notes. Dependency notices remain with their sources.
 
 ## Release Notes
 
