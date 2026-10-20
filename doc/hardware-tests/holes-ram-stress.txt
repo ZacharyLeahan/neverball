@@ -1,0 +1,9 @@
+shot-putt/vidski.jpg
+Temporary RAM stress course. Unmodified stock holes.
+map-vidski/bankaround.sol   back/blues.png       6  bgm/track4.ogg
+map-vidski/bankaround.sol   back/blues.png       6  bgm/track4.ogg
+map-vidski/hourglass.sol    back/red_blu.png     3  bgm/track1.ogg
+map-vidski/voodoo.sol       back/blk_org.png      8  bgm/track6.ogg
+map-vidski/corkscrewspin.sol    back/blues.png    3  bgm/track4.ogg
+map-iCourse/iPutt18.sol      back/org_yel.png       7 bgm/track6.ogg
+map-putt/01_easy.sol     back/blues.png       2 bgm/track1.ogg
