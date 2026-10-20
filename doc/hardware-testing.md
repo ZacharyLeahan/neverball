@@ -480,10 +480,22 @@ cleared (the previously recorded flag-disabled binary), deployed/read-back
 verified at `20261020T171927Z`. Confirmed Adventure selection on screen before
 loading it. The same class of DMA invalid-data screen appeared without the
 cap. This establishes that the failure is not exclusive to the 64 MiB runtime
-budget; the precise malformed command/root cause remains unknown. A second
-physical reboot was requested to retrieve that log and restore the capped
-setup. Remaining planned levels and course coverage were not completed at
-this point and must not be reported as passes.
+budget; the precise malformed command/root cause remains unknown. The user rebooted again; the uncapped log was recovered at
+`build/hardware/20261020T191135Z/`. Its minimum sampled available memory was
+25,194 pages (98.414 MiB), further arguing against a simple low-free-memory
+explanation, without proving the root cause.
+
+Restored the capped diagnostic XBE and read-back verified it at
+`20261020T191146Z`. Rings loaded into gameplay, rendered and accepted D-pad
+movement, followed by pause/Give Up and return to the level menu. Learn and
+Grow reached its rendered introduction; gameplay was not confirmed and is
+not counted as a pass. Other planned levels and Neverputt were not completed
+in this expanded run. The game returned through Exit to XBMC without a reboot.
+Final logs: `20261020T191541Z`. This run reached a lower sampled minimum of
+7,253 pages (**28.332 MiB free**) and completed cleanup with zero audio decode
+or seek errors. Restored original `sets.txt`, removed the
+temporary set and unlock score, and read-back verified the capped normal
+installation at `20261020T191542Z`. The known-good installation was untouched.
 
 [Issue #10](https://github.com/ZacharyLeahan/neverball-nxdk/issues/10) records
 reproduction details, hashes, comparisons and screenshots. Captures are under

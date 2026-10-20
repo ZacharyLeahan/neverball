@@ -97,7 +97,7 @@ sets `Limit64Megabytes`. An A/B test changing only that header bit showed
 reports 128 MiB installed; that is not the game's effective allocation budget.
 
 Title/replay, Easy 3 gameplay, restart/menu transitions and the large Confetti
-level have run under this cap. The extended run retained about **34.4 MiB
+level, plus Rings gameplay and return-to-menu, have run under this cap. The extended run retained about **28.3 MiB
 minimum sampled free RAM**. Samples do not measure every transient peak.
 This makes stock 64 MB operation a reasonable expectation, but **we have not
 tested an actual 64 MB console or every level**.
