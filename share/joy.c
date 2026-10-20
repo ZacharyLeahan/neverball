@@ -38,7 +38,11 @@ void joy_init(void)
 {
     size_t i = 0;
 
-    if (SDL_InitSubSystem(SDL_INIT_JOYSTICK) < 0)
+    if (SDL_InitSubSystem(SDL_INIT_JOYSTICK
+#ifdef NXDK
+                          | SDL_INIT_GAMECONTROLLER
+#endif
+                          ) < 0)
     {
         log_printf("Failure to initialize joystick (%s)\n", SDL_GetError());
         return;
@@ -51,6 +55,9 @@ void joy_init(void)
     }
 
     SDL_JoystickEventState(SDL_ENABLE);
+#ifdef NXDK
+    for (i = 0; i < (size_t)SDL_NumJoysticks(); ++i) joy_add((int)i);
+#endif
 }
 
 /*
@@ -72,6 +79,12 @@ void joy_quit(void)
  */
 void joy_add(int device)
 {
+#ifdef NXDK
+    size_t existing;
+    SDL_JoystickID instance = SDL_JoystickGetDeviceInstanceID(device);
+    for (existing = 0; existing < ARRAYSIZE(joysticks); ++existing)
+        if (joysticks[existing].joy && joysticks[existing].id == instance) return;
+#endif
     log_printf("Joystick added (device %d)\n", device);
 
     SDL_Joystick *joy = SDL_JoystickOpen(device);

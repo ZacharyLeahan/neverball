@@ -39,3 +39,10 @@ autosave
 /tests/test
 /tests/test.exe
 /.playwright-mcp
+
+# NXDK outputs
+*.obj
+*.c.d
+/bin
+/main.exe
+/main.lib

@@ -8,6 +8,14 @@ given  time.  If  the  ball falls  or time  expires, a ball is lost.
 Collect coins to unlock the exit  and earn extra balls.  Red coins are
 worth 5.  Blue coins are worth 10.  A ball is awarded for 100 coins.
 
+## Original Xbox development
+
+The modern upstream Xbox migration uses NXDK and Ryzee119's nxdk-gles11.
+See [build and port notes](doc/nxdk.md) and the
+[physical hardware ledger](doc/hardware-testing.md) for current status.
+This continues JayFoxRox/Jannik Vogel's original port and the separate
+[neverball-nxdk reference](https://github.com/ZacharyLeahan/neverball-nxdk).
+
 ## Release Notes
 
 Release highlights can be found in [doc/release-notes.md](doc/release-notes.md).

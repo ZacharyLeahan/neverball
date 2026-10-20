@@ -123,6 +123,7 @@ void file_copy(FILE *fin, FILE *fout);
 int path_is_sep(int);
 int path_is_abs(const char *);
 
+char *path_to_system(char *path);
 char *path_join(const char *, const char *);
 char *path_normalize(char *);
 

@@ -22,3 +22,7 @@
 
 # YAML
 *.yml text
+
+# Preserve SDK patch context and intentionally empty configuration values.
+xbox/patches/*.patch -whitespace
+xbox/neverballrc whitespace=-blank-at-eol

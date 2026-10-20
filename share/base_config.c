@@ -22,7 +22,7 @@
 #include "log.h"
 #include "fs.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(NXDK)
 #include <shlobj.h>
 #endif
 
@@ -55,7 +55,7 @@ static const char *pick_data_path(const char *arg_data_path)
 
 static const char *pick_home_path(void)
 {
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(NXDK)
     static char path[MAX_PATH];
 
     if (SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, 0, path) == S_OK)
@@ -101,7 +101,9 @@ void config_paths(const char *arg_data_path)
 
     home = pick_home_path();
 
-#ifdef __EMSCRIPTEN__
+#ifdef NXDK
+    user = strdup(CONFIG_USER);
+#elif defined(__EMSCRIPTEN__)
     /* Force IndexedDB-backed location created during Module['preRun']. */
     user = strdup("/neverball");
 #else

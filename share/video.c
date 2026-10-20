@@ -17,6 +17,9 @@
 #endif
 
 #include <SDL.h>
+#ifdef NXDK
+#include "platform.h"
+#endif
 
 #include "video.h"
 #include "common.h"
@@ -152,7 +155,12 @@ void video_resize(int window_w, int window_h)
 
         /* Update drawable size (for rendering). */
 
+#ifdef NXDK
+        video.device_w = 640;
+        video.device_h = 480;
+#else
         SDL_GL_GetDrawableSize(window, &video.device_w, &video.device_h);
+#endif
 
         video.device_scale = (float) video.device_h / (float) video.window_h;
 
@@ -206,7 +214,9 @@ void video_quit(void)
 {
     if (context)
     {
+#ifndef NXDK
         SDL_GL_DeleteContext(context);
+#endif
         context = NULL;
     }
 
@@ -263,7 +273,9 @@ int video_mode(int f, int w, int h)
                w, h, (f ? "fullscreen" : "windowed"));
 
     window = SDL_CreateWindow("", X, Y, w, h,
+#ifndef NXDK
                               SDL_WINDOW_OPENGL |
+#endif
                               (highdpi ? SDL_WINDOW_ALLOW_HIGHDPI : 0) |
 #ifndef __EMSCRIPTEN__
                               (f ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0) |
@@ -273,6 +285,10 @@ int video_mode(int f, int w, int h)
 
     if (window)
     {
+#ifdef NXDK
+        xbox_video_init();
+        context = (SDL_GLContext) 1;
+#else
         if ((context = SDL_GL_CreateContext(window)))
         {
             int buf, smp;
@@ -303,6 +319,7 @@ int video_mode(int f, int w, int h)
                 context = NULL;
             }
         }
+#endif
     }
 
     if (window && context)
@@ -313,7 +330,11 @@ int video_mode(int f, int w, int h)
         config_set_d(CONFIG_DISPLAY,    video_display());
         config_set_d(CONFIG_FULLSCREEN, f);
 
+#ifdef NXDK
+        glSwapInterval(vsync);
+#else
         SDL_GL_SetSwapInterval(vsync);
+#endif
 
         if (!glext_init())
             return 0;
@@ -419,7 +440,11 @@ void video_swap(void)
 
     snapshot_take();
 
+#ifdef NXDK
+    xbox_video_swap();
+#else
     SDL_GL_SwapWindow(window);
+#endif
 
     /* Accumulate time passed and frames rendered. */
 

@@ -77,8 +77,8 @@ int fs_rename(const char *src, const char *dst)
 
     if ((write_dir = fs_get_write_dir()))
     {
-        real_src = concat_string(write_dir, "/", src, NULL);
-        real_dst = concat_string(write_dir, "/", dst, NULL);
+        real_src = path_to_system(path_join(write_dir, src));
+        real_dst = path_to_system(path_join(write_dir, dst));
 
         rc = file_rename(real_src, real_dst);
 

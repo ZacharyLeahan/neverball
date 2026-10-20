@@ -12,7 +12,11 @@
  * General Public License for more details.
  */
 
+#ifdef NXDK
+#include <windows.h>
+#else
 #include <dirent.h>
+#endif
 
 #include <string.h>
 #include <stdlib.h>
@@ -32,6 +36,25 @@
  */
 List dir_list_files(const char *path)
 {
+#ifdef NXDK
+    WIN32_FIND_DATA data;
+    char *pattern = path_to_system(path_join(path, "*"));
+    if (!pattern) return NULL;
+    HANDLE search = FindFirstFileA(pattern, &data);
+    List files = NULL;
+    free(pattern);
+    if (search != INVALID_HANDLE_VALUE)
+    {
+        do {
+            if (strcmp(data.cFileName, ".") && strcmp(data.cFileName, ".."))
+            {
+                char *name = strdup(data.cFileName);
+                if (name && !list_push(&files, name)) free(name);
+            }
+        } while (FindNextFileA(search, &data));
+        FindClose(search);
+    }
+#else
     DIR *dir;
     List files = NULL;
 
@@ -56,6 +79,7 @@ List dir_list_files(const char *path)
         closedir(dir);
     }
 
+#endif
     return files;
 }
 
@@ -179,6 +203,14 @@ void dir_free(Array items)
  */
 int dir_exists(const char *path)
 {
+#ifdef NXDK
+    char *native = path_to_system(strdup(path));
+    DWORD attr;
+    if (!native) return 0;
+    attr = GetFileAttributesA(native);
+    free(native);
+    return attr != INVALID_FILE_ATTRIBUTES && (attr & FILE_ATTRIBUTE_DIRECTORY);
+#else
     DIR *dir;
 
     if ((dir = opendir(path)))
@@ -187,4 +219,5 @@ int dir_exists(const char *path)
         return 1;
     }
     return 0;
+#endif
 }

@@ -201,7 +201,10 @@ int fs_add_path(const char *path)
         {
             mz_zip_zero_struct(zip);
 
-            if (mz_zip_reader_init_file(zip, path, 0))
+            char *native = path_to_system(strdup(path));
+            int opened = native && mz_zip_reader_init_file(zip, native, 0);
+            free(native);
+            if (opened)
             {
                 if (fs_logging)
                     log_printf("FS: reading from \"%s\" (zip)\n", path);
@@ -406,7 +409,7 @@ static List list_files(const char *path)
 
         if (path_item->type == FS_PATH_DIRECTORY)
         {
-            char *real = path_join(path_item->path, path);
+            char *real = path_to_system(path_join(path_item->path, path));
             path_files = dir_list_files(real);
             free(real);
         }
@@ -475,7 +478,7 @@ fs_file fs_open_read(const char *path)
 
             if (path_item->type == FS_PATH_DIRECTORY)
             {
-                char *real = path_join(path_item->path, path);
+                char *real = path_to_system(path_join(path_item->path, path));
 
                 if ((fh->handle = fopen(real, "rb")))
                 {
@@ -519,7 +522,7 @@ static fs_file fs_open_write_flags(const char *path, int append)
         {
             char *real;
 
-            if ((real = path_join(fs_dir_write, path)))
+            if ((real = path_to_system(path_join(fs_dir_write, path))))
             {
                 fh->handle = fopen(real, append ? "ab" : "wb");
                 fh->path_type = FS_PATH_DIRECTORY;
@@ -586,7 +589,7 @@ int fs_mkdir(const char *path)
 
     if (fs_dir_write)
     {
-        char *real = path_join(fs_dir_write, path);
+        char *real = path_to_system(path_join(fs_dir_write, path));
         success = dir_make(real) == 0;
         free((void *) real);
     }
@@ -612,7 +615,7 @@ int fs_remove(const char *path)
 
     if (fs_dir_write)
     {
-        char *real = path_join(fs_dir_write, path);
+        char *real = path_to_system(path_join(fs_dir_write, path));
         success = (remove(real) == 0);
         free(real);
     }
@@ -728,7 +731,7 @@ int fs_size(const char *path)
 
         if (path_item->type == FS_PATH_DIRECTORY)
         {
-            char *real = path_join(path_item->path, path);
+            char *real = path_to_system(path_join(path_item->path, path));
 
             if (real)
             {

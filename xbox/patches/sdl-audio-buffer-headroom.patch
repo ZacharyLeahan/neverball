@@ -1,0 +1,12 @@
+--- a/src/audio/xbox/SDL_xboxaudio.h
++++ b/src/audio/xbox/SDL_xboxaudio.h
+@@ -31,7 +31,8 @@
+ 
+ #define _THIS  SDL_AudioDevice *_this
+ 
+-#define BUFFER_COUNT 2
++/* Keep three buffers queued while the fourth is mixed (64 ms headroom). */
++#define BUFFER_COUNT 4
+ 
+ typedef struct SDL_PrivateAudioData {
+     void* buffers[BUFFER_COUNT];

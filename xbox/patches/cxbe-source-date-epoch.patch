@@ -1,0 +1,46 @@
+diff --git a/tools/cxbe/Xbe.cpp b/tools/cxbe/Xbe.cpp
+index 1ff7b80..b5e41df 100644
+--- a/tools/cxbe/Xbe.cpp
++++ b/tools/cxbe/Xbe.cpp
+@@ -11,6 +11,7 @@
+ 
+ #include <algorithm>
+ #include <cstdio>
++#include <errno.h>
+ #include <cstring>
+ #include <locale.h>
+ #include <memory.h>
+@@ -37,9 +38,30 @@ Xbe::Xbe(class Exe *x_Exe, const char *x_szTitle, bool x_bRetail, const std::vec
+ {
+     ConstructorInit();
+ 
+-    time_t CurrentTime;
+-
+-    time(&CurrentTime);
++    uint32 CurrentTime;
++    const char *epoch = getenv("SOURCE_DATE_EPOCH");
++    if(epoch != nullptr)
++    {
++        const char *digit = epoch;
++        while(*digit >= '0' && *digit <= '9')
++            ++digit;
++        errno = 0;
++        char *end = nullptr;
++        unsigned long long parsed = strtoull(epoch, &end, 10);
++        if(epoch == digit || *digit != '\0' || *end != '\0' ||
++           errno == ERANGE || parsed > 0xffffffffULL)
++        {
++            SetError("Invalid SOURCE_DATE_EPOCH (expected unsigned 32-bit decimal seconds)", true);
++            return;
++        }
++        CurrentTime = static_cast<uint32>(parsed);
++    }
++    else
++    {
++        time_t now;
++        time(&now);
++        CurrentTime = static_cast<uint32>(now);
++    }
+ 
+     printf("Xbe::Xbe: Pass 1 (Simple Pass)...");
+     std::string debug_path = x_szDebugPath;

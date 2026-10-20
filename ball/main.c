@@ -606,6 +606,20 @@ static int loop(void)
             joy_axis(e.jaxis.which, e.jaxis.axis, JOY_VALUE(e.jaxis.value));
             break;
 
+#ifdef NXDK
+        case SDL_JOYHATMOTION:
+            if (e.jhat.hat == 0)
+            {
+                joy_axis(e.jhat.which, config_get_d(CONFIG_JOYSTICK_AXIS_X0),
+                         (e.jhat.value & SDL_HAT_RIGHT ? 1.0f : 0.0f) -
+                         (e.jhat.value & SDL_HAT_LEFT ? 1.0f : 0.0f));
+                joy_axis(e.jhat.which, config_get_d(CONFIG_JOYSTICK_AXIS_Y0),
+                         (e.jhat.value & SDL_HAT_DOWN ? 1.0f : 0.0f) -
+                         (e.jhat.value & SDL_HAT_UP ? 1.0f : 0.0f));
+            }
+            break;
+#endif
+
         case SDL_JOYBUTTONDOWN:
             d = joy_button(e.jbutton.which, e.jbutton.button, 1);
             break;
@@ -829,8 +843,17 @@ static int main_init(int argc, char *argv[])
 
     opt_init(argc, argv);
 
+#ifdef NXDK
+    printf("startup: config_paths\n");
+#endif
     config_paths(opt_data);
+#ifdef NXDK
+    printf("startup: log_init\n");
+#endif
     log_init("Neverball " VERSION, "neverball.log");
+#ifdef NXDK
+    printf("startup: make_dirs_and_migrate\n");
+#endif
     make_dirs_and_migrate();
 
     /* Initialize SDL. */
@@ -839,6 +862,9 @@ static int main_init(int argc, char *argv[])
     SDL_SetHint(SDL_HINT_TOUCH_MOUSE_EVENTS, "0");
 #endif
 
+#ifdef NXDK
+    printf("startup: SDL_Init\n");
+#endif
     if (SDL_Init(SDL_INIT_VIDEO) == -1)
     {
         log_printf("Failure to initialize SDL (%s)\n", SDL_GetError());
@@ -847,35 +873,59 @@ static int main_init(int argc, char *argv[])
 
     /* Intitialize configuration. */
 
+#ifdef NXDK
+    printf("startup: config_init\n");
+#endif
     config_init();
+#ifdef NXDK
+    printf("startup: config_load\n");
+#endif
     config_load();
 
     fetch_enable(config_get_d(CONFIG_ONLINE));
 
+#ifdef NXDK
+    printf("startup: package_init\n");
+#endif
     package_init();
 
     package_set_installed_action(handle_installed_action);
 
     /* Enable joystick events. */
 
+#ifdef NXDK
+    printf("startup: joy_init\n");
+#endif
     joy_init();
 
     /* Initialize localization. */
 
+#ifdef NXDK
+    printf("startup: lang_init\n");
+#endif
     lang_init();
 
     /* Initialize audio. */
 
+#ifdef NXDK
+    printf("startup: audio_init\n");
+#endif
     audio_init();
     tilt_init();
 
     /* Initialize video. */
 
+#ifdef NXDK
+    printf("startup: video_init\n");
+#endif
     if (!video_init())
         return 0;
 
     /* Material system. */
 
+#ifdef NXDK
+    printf("startup: mtrl_init\n");
+#endif
     mtrl_init();
 
     return 1;
@@ -915,8 +965,15 @@ static void main_quit(void)
     opt_quit();
 }
 
+#ifdef NXDK
+#include "platform.h"
+#include <hal/xbox.h>
+#endif
 int main(int argc, char *argv[])
 {
+#ifdef NXDK
+    xbox_startup();
+#endif
     struct main_loop mainloop = { 0 };
 
     struct state *start_state = &st_title;
@@ -945,6 +1002,9 @@ int main(int argc, char *argv[])
             log_printf("File %s is not in game path\n", opt_level);
     }
 
+#ifdef NXDK
+    printf("startup: main_preload\n");
+#endif
     main_preload(start_state);
 
     /* Run the main game loop. */
@@ -969,6 +1029,9 @@ int main(int argc, char *argv[])
         step(&mainloop);
 
     main_quit();
+#ifdef NXDK
+    XReboot();
+#endif
 #endif
 
     return 0;
