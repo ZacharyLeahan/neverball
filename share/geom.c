@@ -40,11 +40,21 @@ static void tex_env_conf_default(int, int);
 static void tex_env_conf_shadow(int, int);
 static void tex_env_conf_pose(int, int);
 
+/* NV2A generates point-sprite coordinates only for texture unit 3.
+ * Keep the base texture there for particles and ordinary geometry alike,
+ * so material tracking and shadow/clip stages retain their normal lifecycle.
+ */
+#ifdef NXDK
+#define BASE_TEXTURE_UNIT(desktop_unit) GL_TEXTURE3
+#else
+#define BASE_TEXTURE_UNIT(desktop_unit) desktop_unit
+#endif
+
 const struct tex_env tex_env_default = {
     tex_env_conf_default,
     1,
     {
-        { GL_TEXTURE0, TEX_STAGE_TEXTURE }
+        { BASE_TEXTURE_UNIT(GL_TEXTURE0), TEX_STAGE_TEXTURE }
     }
 };
 
@@ -53,7 +63,7 @@ const struct tex_env tex_env_shadow = {
     2,
     {
         { GL_TEXTURE0, TEX_STAGE_SHADOW },
-        { GL_TEXTURE1, TEX_STAGE_TEXTURE }
+        { BASE_TEXTURE_UNIT(GL_TEXTURE1), TEX_STAGE_TEXTURE }
     }
 };
 
@@ -63,7 +73,7 @@ const struct tex_env tex_env_shadow_clip = {
     {
         { GL_TEXTURE0, TEX_STAGE_SHADOW },
         { GL_TEXTURE1, TEX_STAGE_CLIP },
-        { GL_TEXTURE2, TEX_STAGE_TEXTURE }
+        { BASE_TEXTURE_UNIT(GL_TEXTURE2), TEX_STAGE_TEXTURE }
     }
 };
 
@@ -72,7 +82,7 @@ const struct tex_env tex_env_pose = {
     2,
     {
         { GL_TEXTURE0, TEX_STAGE_SHADOW },
-        { GL_TEXTURE1, TEX_STAGE_TEXTURE }
+        { BASE_TEXTURE_UNIT(GL_TEXTURE1), TEX_STAGE_TEXTURE }
     }
 };
 
