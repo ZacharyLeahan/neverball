@@ -1,0 +1,646 @@
+Modern Neverball Xbox startup
+audio-test callbacks=0 phase=0 eof=0 decode_errors=0 seek_errors=0
+ram phase=startup frame=0 page_bytes=4096 total_pages=32768 available_pages=15633 min_available_pages=15633 virtual_committed_bytes=2600960 virtual_reserved_bytes=2600960 cache_pages=16 pool_pages=2 stack_pages=19 image_pages=618
+system: game=\Device\Harddisk0\Partition6\neverball-upstream\default.xbe launcher=E:\Dashboard\default.xbe
+startup: config_paths
+startup: log_init
+startup: make_dirs_and_migrate
+startup: SDL_Init
+startup: config_init
+startup: config_load
+startup: package_init
+startup: joy_init
+startup: lang_init
+startup: audio_init
+audio: driver=xbox rate=48000 channels=2 samples=1024 bytes=4096
+startup: video_init
+gpu pushbuffer_bytes=1048576
+GLES context ready
+audio-test callbacks=1 phase=4 eof=0 decode_errors=0 seek_errors=0
+ram phase=graphics-ready frame=0 page_bytes=4096 total_pages=32768 available_pages=13192 min_available_pages=13192 virtual_committed_bytes=2600960 virtual_reserved_bytes=2600960 cache_pages=16 pool_pages=2 stack_pages=51 image_pages=618
+startup: mtrl_init
+startup: main_preload
+hole load=1 party=1 file=map-putt/01_easy.sol
+state leave=other enter=other ticks=3285
+state ready=other ticks=4220
+state leave=other enter=next ticks=4239
+state ready=next ticks=4258
+audio-test callbacks=78 phase=4 eof=0 decode_errors=0 seek_errors=0
+ram phase=present frame=1 page_bytes=4096 total_pages=32768 available_pages=10982 min_available_pages=10982 virtual_committed_bytes=6115328 virtual_reserved_bytes=6115328 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=5119
+state ready=flyby ticks=5130
+state leave=flyby enter=stroke ticks=6136
+state ready=stroke ticks=6144
+shot-test shoot=1 hole=1 ticks=6769
+state leave=stroke enter=roll ticks=6773
+state ready=roll ticks=6781
+audio-test callbacks=316 phase=4 eof=0 decode_errors=0 seek_errors=0
+ram phase=present frame=300 page_bytes=4096 total_pages=32768 available_pages=11008 min_available_pages=10982 virtual_committed_bytes=6115328 virtual_reserved_bytes=6115328 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=11319
+state ready=stop ticks=11327
+state leave=stop enter=next ticks=12337
+state ready=next ticks=12352
+state leave=next enter=flyby ticks=12969
+state ready=flyby ticks=12981
+state leave=flyby enter=stroke ticks=13986
+state ready=stroke ticks=13994
+shot-test shoot=2 hole=1 ticks=14620
+state leave=stroke enter=roll ticks=14624
+state ready=roll ticks=14632
+audio-test callbacks=554 phase=4 eof=0 decode_errors=0 seek_errors=0
+ram phase=present frame=600 page_bytes=4096 total_pages=32768 available_pages=11008 min_available_pages=10982 virtual_committed_bytes=6115328 virtual_reserved_bytes=6115328 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=18303
+state ready=stop ticks=18313
+state leave=stop enter=next ticks=19319
+state ready=next ticks=19337
+audio-test callbacks=791 phase=4 eof=0 decode_errors=0 seek_errors=0
+ram phase=present frame=900 page_bytes=4096 total_pages=32768 available_pages=10982 min_available_pages=10982 virtual_committed_bytes=6115328 virtual_reserved_bytes=6115328 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=19953
+state ready=flyby ticks=19961
+state leave=flyby enter=stroke ticks=20969
+state ready=stroke ticks=20980
+shot-test shoot=3 hole=1 ticks=21602
+state leave=stroke enter=roll ticks=21607
+state ready=roll ticks=21618
+state leave=roll enter=fall ticks=23053
+state ready=fall ticks=23077
+audio-test callbacks=983 phase=4 eof=4 decode_errors=0 seek_errors=0
+ram phase=present frame=1140 page_bytes=4096 total_pages=32768 available_pages=10928 min_available_pages=10928 virtual_committed_bytes=6311936 virtual_reserved_bytes=6311936 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+audio-test callbacks=1031 phase=4 eof=4 decode_errors=0 seek_errors=0
+ram phase=present frame=1200 page_bytes=4096 total_pages=32768 available_pages=10928 min_available_pages=10928 virtual_committed_bytes=6311936 virtual_reserved_bytes=6311936 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=fall enter=next ticks=26054
+state ready=next ticks=26069
+state leave=next enter=flyby ticks=26686
+state ready=flyby ticks=26696
+state leave=flyby enter=stroke ticks=27702
+state ready=stroke ticks=27711
+shot-test shoot=4 hole=1 ticks=28337
+state leave=stroke enter=roll ticks=28341
+state ready=roll ticks=28350
+audio-test callbacks=1270 phase=4 eof=8 decode_errors=0 seek_errors=0
+ram phase=present frame=1500 page_bytes=4096 total_pages=32768 available_pages=10960 min_available_pages=10928 virtual_committed_bytes=6311936 virtual_reserved_bytes=6311936 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=31469
+state ready=stop ticks=31480
+state leave=stop enter=next ticks=32486
+state ready=next ticks=32504
+state leave=next enter=flyby ticks=33119
+state ready=flyby ticks=33127
+state leave=flyby enter=stroke ticks=34136
+state ready=stroke ticks=34147
+shot-test shoot=5 hole=1 ticks=34752
+state leave=stroke enter=roll ticks=34760
+state ready=roll ticks=34768
+audio-test callbacks=1509 phase=4 eof=8 decode_errors=0 seek_errors=0
+ram phase=present frame=1800 page_bytes=4096 total_pages=32768 available_pages=10960 min_available_pages=10928 virtual_committed_bytes=6311936 virtual_reserved_bytes=6311936 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=roll enter=goal ticks=38436
+state ready=goal ticks=38456
+audio-test callbacks=1746 phase=4 eof=15 decode_errors=0 seek_errors=0
+ram phase=present frame=2100 page_bytes=4096 total_pages=32768 available_pages=10944 min_available_pages=10928 virtual_committed_bytes=6311936 virtual_reserved_bytes=6311936 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+state leave=goal enter=score ticks=41452
+state ready=score ticks=41485
+audio-test callbacks=1843 phase=4 eof=15 decode_errors=0 seek_errors=0
+ram phase=present frame=2220 page_bytes=4096 total_pages=32768 available_pages=10919 min_available_pages=10919 virtual_committed_bytes=6311936 virtual_reserved_bytes=6311936 cache_pages=16 pool_pages=4 stack_pages=51 image_pages=618
+hole load=2 party=1 file=map-putt/02_uturn.sol
+state leave=score enter=next ticks=42929
+state ready=next ticks=42945
+state leave=next enter=flyby ticks=43569
+state ready=flyby ticks=43577
+audio-test callbacks=1913 phase=4 eof=15 decode_errors=0 seek_errors=0
+ram phase=present frame=2280 page_bytes=4096 total_pages=32768 available_pages=10896 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=44586
+state ready=stroke ticks=44598
+shot-test shoot=6 hole=2 ticks=45219
+state leave=stroke enter=roll ticks=45223
+state ready=roll ticks=45235
+audio-test callbacks=2011 phase=4 eof=16 decode_errors=0 seek_errors=0
+ram phase=present frame=2400 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=48221
+state ready=stop ticks=48229
+state leave=stop enter=next ticks=49236
+state ready=next ticks=49254
+state leave=next enter=flyby ticks=49869
+state ready=flyby ticks=49877
+audio-test callbacks=2248 phase=4 eof=16 decode_errors=0 seek_errors=0
+ram phase=present frame=2700 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=50886
+state ready=stroke ticks=50895
+shot-test shoot=7 hole=2 ticks=51519
+state leave=stroke enter=roll ticks=51523
+state ready=roll ticks=51535
+state leave=roll enter=stop ticks=54803
+state ready=stop ticks=54815
+state leave=stop enter=next ticks=55819
+state ready=next ticks=55837
+audio-test callbacks=2488 phase=4 eof=18 decode_errors=0 seek_errors=0
+ram phase=present frame=3000 page_bytes=4096 total_pages=32768 available_pages=10896 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=56455
+state ready=flyby ticks=56464
+state leave=flyby enter=stroke ticks=57469
+state ready=stroke ticks=57480
+shot-test shoot=8 hole=2 ticks=58102
+state leave=stroke enter=roll ticks=58107
+state ready=roll ticks=58115
+audio-test callbacks=2726 phase=4 eof=19 decode_errors=0 seek_errors=0
+ram phase=present frame=3300 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=61203
+state ready=stop ticks=61214
+state leave=stop enter=next ticks=62219
+state ready=next ticks=62237
+state leave=next enter=flyby ticks=62854
+state ready=flyby ticks=62863
+state leave=flyby enter=stroke ticks=63869
+state ready=stroke ticks=63880
+shot-test shoot=9 hole=2 ticks=64502
+state leave=stroke enter=roll ticks=64507
+state ready=roll ticks=64515
+audio-test callbacks=2966 phase=4 eof=21 decode_errors=0 seek_errors=0
+ram phase=present frame=3600 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=67786
+state ready=stop ticks=67794
+state leave=stop enter=next ticks=68803
+state ready=next ticks=68820
+state leave=next enter=flyby ticks=69419
+state ready=flyby ticks=69430
+state leave=flyby enter=stroke ticks=70436
+state ready=stroke ticks=70444
+shot-test shoot=10 hole=2 ticks=71069
+state leave=stroke enter=roll ticks=71073
+state ready=roll ticks=71082
+audio-test callbacks=3206 phase=4 eof=21 decode_errors=0 seek_errors=0
+ram phase=present frame=3900 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=74153
+state ready=stop ticks=74164
+state leave=stop enter=next ticks=75169
+state ready=next ticks=75187
+state leave=next enter=flyby ticks=75804
+state ready=flyby ticks=75812
+audio-test callbacks=3443 phase=4 eof=22 decode_errors=0 seek_errors=0
+ram phase=present frame=4200 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=76819
+state ready=stroke ticks=76830
+shot-test shoot=11 hole=2 ticks=77452
+state leave=stroke enter=roll ticks=77457
+state ready=roll ticks=77468
+state leave=roll enter=stop ticks=80689
+state ready=stop ticks=80697
+audio-test callbacks=3683 phase=4 eof=24 decode_errors=0 seek_errors=0
+ram phase=present frame=4500 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=81703
+state ready=next ticks=81721
+state leave=next enter=flyby ticks=82336
+state ready=flyby ticks=82344
+state leave=flyby enter=stroke ticks=83352
+state ready=stroke ticks=83364
+shot-test shoot=12 hole=2 ticks=83969
+state leave=stroke enter=roll ticks=83975
+state ready=roll ticks=83983
+audio-test callbacks=3922 phase=4 eof=25 decode_errors=0 seek_errors=0
+ram phase=present frame=4800 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=87070
+state ready=stop ticks=87078
+state leave=stop enter=next ticks=88071
+state ready=next ticks=88086
+state leave=next enter=flyby ticks=88702
+state ready=flyby ticks=88714
+state leave=flyby enter=stroke ticks=89719
+state ready=stroke ticks=89727
+shot-test shoot=13 hole=2 ticks=90353
+state leave=stroke enter=roll ticks=90361
+state ready=roll ticks=90370
+audio-test callbacks=4161 phase=4 eof=26 decode_errors=0 seek_errors=0
+ram phase=present frame=5100 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=93803
+state ready=stop ticks=93817
+state leave=stop enter=next ticks=94819
+state ready=next ticks=94841
+state leave=next enter=flyby ticks=95452
+state ready=flyby ticks=95464
+state leave=flyby enter=stroke ticks=96469
+state ready=stroke ticks=96484
+audio-test callbacks=4401 phase=4 eof=27 decode_errors=0 seek_errors=0
+ram phase=present frame=5400 page_bytes=4096 total_pages=32768 available_pages=10922 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+shot-test shoot=14 hole=2 ticks=97102
+state leave=stroke enter=roll ticks=97110
+state ready=roll ticks=97122
+state leave=roll enter=stop ticks=100169
+state ready=stop ticks=100181
+state leave=stop enter=next ticks=101186
+state ready=next ticks=101205
+state leave=next enter=flyby ticks=101802
+state ready=flyby ticks=101819
+audio-test callbacks=4641 phase=4 eof=28 decode_errors=0 seek_errors=0
+ram phase=present frame=5700 page_bytes=4096 total_pages=32768 available_pages=10896 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=102836
+state ready=stroke ticks=102848
+shot-test shoot=15 hole=2 ticks=103469
+state leave=stroke enter=roll ticks=103477
+state ready=roll ticks=103486
+state leave=roll enter=stop ticks=106738
+state ready=stop ticks=106750
+audio-test callbacks=4879 phase=4 eof=30 decode_errors=0 seek_errors=0
+ram phase=present frame=6000 page_bytes=4096 total_pages=32768 available_pages=10920 min_available_pages=10896 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=107753
+state ready=next ticks=107774
+audio-test callbacks=4928 phase=4 eof=30 decode_errors=0 seek_errors=0
+ram phase=present frame=6060 page_bytes=4096 total_pages=32768 available_pages=10894 min_available_pages=10894 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=108386
+state ready=flyby ticks=108402
+state leave=flyby enter=stroke ticks=109419
+state ready=stroke ticks=109434
+shot-test shoot=16 hole=2 ticks=110052
+state leave=stroke enter=roll ticks=110061
+state ready=roll ticks=110073
+audio-test callbacks=5120 phase=4 eof=31 decode_errors=0 seek_errors=0
+ram phase=present frame=6300 page_bytes=4096 total_pages=32768 available_pages=10920 min_available_pages=10894 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=113153
+state ready=stop ticks=113167
+state leave=stop enter=next ticks=114169
+state ready=next ticks=114192
+state leave=next enter=flyby ticks=114802
+state ready=flyby ticks=114815
+state leave=flyby enter=stroke ticks=115819
+state ready=stroke ticks=115833
+shot-test shoot=17 hole=2 ticks=116452
+state leave=stroke enter=roll ticks=116461
+state ready=roll ticks=116472
+audio-test callbacks=5359 phase=4 eof=33 decode_errors=0 seek_errors=0
+ram phase=present frame=6600 page_bytes=4096 total_pages=32768 available_pages=10920 min_available_pages=10894 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=119786
+state ready=stop ticks=119802
+state leave=stop enter=score ticks=120803
+state ready=score ticks=120841
+audio-test callbacks=5551 phase=4 eof=34 decode_errors=0 seek_errors=0
+ram phase=present frame=6840 page_bytes=4096 total_pages=32768 available_pages=10879 min_available_pages=10879 virtual_committed_bytes=6463488 virtual_reserved_bytes=6463488 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+hole load=3 party=1 file=map-putt/03_kink.sol
+state leave=score enter=next ticks=122218
+state ready=next ticks=122237
+audio-test callbacks=5618 phase=4 eof=34 decode_errors=0 seek_errors=0
+ram phase=present frame=6900 page_bytes=4096 total_pages=32768 available_pages=11055 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=122869
+state ready=flyby ticks=122877
+state leave=flyby enter=stroke ticks=123886
+state ready=stroke ticks=123898
+shot-test shoot=18 hole=3 ticks=124519
+state leave=stroke enter=roll ticks=124530
+state ready=roll ticks=124538
+audio-test callbacks=5857 phase=4 eof=35 decode_errors=0 seek_errors=0
+ram phase=present frame=7200 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=128053
+state ready=stop ticks=128061
+state leave=stop enter=next ticks=129054
+state ready=next ticks=129075
+state leave=next enter=flyby ticks=129686
+state ready=flyby ticks=129700
+state leave=flyby enter=stroke ticks=130719
+state ready=stroke ticks=130731
+shot-test shoot=19 hole=3 ticks=131352
+state leave=stroke enter=roll ticks=131361
+state ready=roll ticks=131369
+audio-test callbacks=6098 phase=4 eof=36 decode_errors=0 seek_errors=0
+ram phase=present frame=7500 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=135239
+state ready=stop ticks=135251
+state leave=stop enter=next ticks=136253
+state ready=next ticks=136273
+state leave=next enter=flyby ticks=136886
+state ready=flyby ticks=136898
+state leave=flyby enter=stroke ticks=137905
+state ready=stroke ticks=137917
+audio-test callbacks=6338 phase=4 eof=37 decode_errors=0 seek_errors=0
+ram phase=present frame=7800 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+shot-test shoot=20 hole=3 ticks=138536
+state leave=stroke enter=roll ticks=138547
+state ready=roll ticks=138555
+state leave=roll enter=stop ticks=142219
+state ready=stop ticks=142231
+audio-test callbacks=6575 phase=4 eof=37 decode_errors=0 seek_errors=0
+ram phase=present frame=8100 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=143239
+state ready=next ticks=143254
+state leave=next enter=flyby ticks=143869
+state ready=flyby ticks=143884
+state leave=flyby enter=stroke ticks=144902
+state ready=stroke ticks=144914
+shot-test shoot=21 hole=3 ticks=145536
+state leave=stroke enter=roll ticks=145548
+state ready=roll ticks=145556
+audio-test callbacks=6816 phase=4 eof=43 decode_errors=0 seek_errors=0
+ram phase=present frame=8400 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=149086
+state ready=stop ticks=149098
+state leave=stop enter=next ticks=150103
+state ready=next ticks=150122
+state leave=next enter=flyby ticks=150719
+state ready=flyby ticks=150734
+state leave=flyby enter=stroke ticks=151752
+state ready=stroke ticks=151764
+shot-test shoot=22 hole=3 ticks=152386
+state leave=stroke enter=roll ticks=152395
+state ready=roll ticks=152403
+audio-test callbacks=7058 phase=3 eof=47 decode_errors=0 seek_errors=0
+ram phase=present frame=8700 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=155506
+state ready=stop ticks=155518
+state leave=stop enter=next ticks=156519
+state ready=next ticks=156540
+state leave=next enter=flyby ticks=157152
+state ready=flyby ticks=157164
+state leave=flyby enter=stroke ticks=158173
+state ready=stroke ticks=158186
+audio-test callbacks=7298 phase=4 eof=48 decode_errors=0 seek_errors=0
+ram phase=present frame=9000 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+shot-test shoot=23 hole=3 ticks=158802
+state leave=stroke enter=roll ticks=158807
+state ready=roll ticks=158818
+state leave=roll enter=stop ticks=163003
+state ready=stop ticks=163017
+audio-test callbacks=7536 phase=4 eof=55 decode_errors=0 seek_errors=0
+ram phase=present frame=9300 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=164003
+state ready=next ticks=164023
+state leave=next enter=flyby ticks=164636
+state ready=flyby ticks=164648
+state leave=flyby enter=stroke ticks=165652
+state ready=stroke ticks=165667
+shot-test shoot=24 hole=3 ticks=166286
+state leave=stroke enter=roll ticks=166294
+state ready=roll ticks=166306
+audio-test callbacks=7776 phase=4 eof=60 decode_errors=0 seek_errors=0
+ram phase=present frame=9600 page_bytes=4096 total_pages=32768 available_pages=11081 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+state leave=roll enter=goal ticks=169819
+state ready=goal ticks=169854
+state leave=goal enter=score ticks=172836
+state ready=score ticks=172873
+audio-test callbacks=8015 phase=4 eof=61 decode_errors=0 seek_errors=0
+ram phase=present frame=9900 page_bytes=4096 total_pages=32768 available_pages=11036 min_available_pages=10879 virtual_committed_bytes=6078464 virtual_reserved_bytes=6078464 cache_pages=16 pool_pages=5 stack_pages=51 image_pages=618
+hole load=4 party=1 file=map-putt/04_aych.sol
+state leave=score enter=next ticks=174467
+state ready=next ticks=174486
+state leave=next enter=flyby ticks=175136
+state ready=flyby ticks=175147
+audio-test callbacks=8093 phase=4 eof=61 decode_errors=0 seek_errors=0
+ram phase=present frame=9960 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10616 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=176169
+state ready=stroke ticks=176184
+shot-test shoot=25 hole=4 ticks=176802
+state leave=stroke enter=roll ticks=176811
+state ready=roll ticks=176822
+audio-test callbacks=8284 phase=4 eof=62 decode_errors=0 seek_errors=0
+ram phase=present frame=10200 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10616 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=181255
+state ready=stop ticks=181267
+state leave=stop enter=next ticks=182269
+state ready=next ticks=182292
+audio-test callbacks=8429 phase=4 eof=62 decode_errors=0 seek_errors=0
+ram phase=present frame=10380 page_bytes=4096 total_pages=32768 available_pages=10590 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=182902
+state ready=flyby ticks=182910
+state leave=flyby enter=stroke ticks=183921
+state ready=stroke ticks=183933
+shot-test shoot=26 hole=4 ticks=184552
+state leave=stroke enter=roll ticks=184564
+state ready=roll ticks=184572
+audio-test callbacks=8527 phase=4 eof=62 decode_errors=0 seek_errors=0
+ram phase=present frame=10500 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=187986
+state ready=stop ticks=188001
+state leave=stop enter=next ticks=189003
+state ready=next ticks=189024
+state leave=next enter=flyby ticks=189639
+state ready=flyby ticks=189650
+audio-test callbacks=8765 phase=4 eof=63 decode_errors=0 seek_errors=0
+ram phase=present frame=10800 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=190669
+state ready=stroke ticks=190686
+shot-test shoot=27 hole=4 ticks=191302
+state leave=stroke enter=roll ticks=191311
+state ready=roll ticks=191319
+state leave=roll enter=stop ticks=194887
+state ready=stop ticks=194899
+audio-test callbacks=9005 phase=4 eof=65 decode_errors=0 seek_errors=0
+ram phase=present frame=11100 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=195903
+state ready=next ticks=195924
+state leave=next enter=flyby ticks=196536
+state ready=flyby ticks=196548
+state leave=flyby enter=stroke ticks=197569
+state ready=stroke ticks=197584
+shot-test shoot=28 hole=4 ticks=198186
+state leave=stroke enter=roll ticks=198197
+state ready=roll ticks=198205
+audio-test callbacks=9244 phase=4 eof=66 decode_errors=0 seek_errors=0
+ram phase=present frame=11400 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=201419
+state ready=stop ticks=201431
+state leave=stop enter=next ticks=202419
+state ready=next ticks=202441
+state leave=next enter=flyby ticks=203052
+state ready=flyby ticks=203065
+state leave=flyby enter=stroke ticks=204086
+state ready=stroke ticks=204098
+shot-test shoot=29 hole=4 ticks=204720
+state leave=stroke enter=roll ticks=204728
+state ready=roll ticks=204736
+audio-test callbacks=9484 phase=3 eof=66 decode_errors=0 seek_errors=0
+ram phase=present frame=11700 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=207986
+state ready=stop ticks=207998
+state leave=stop enter=next ticks=208988
+state ready=next ticks=209010
+state leave=next enter=flyby ticks=209619
+state ready=flyby ticks=209634
+audio-test callbacks=9723 phase=4 eof=68 decode_errors=0 seek_errors=0
+ram phase=present frame=12000 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=210652
+state ready=stroke ticks=210665
+shot-test shoot=30 hole=4 ticks=211286
+state leave=stroke enter=roll ticks=211296
+state ready=roll ticks=211304
+state leave=roll enter=stop ticks=214369
+state ready=stop ticks=214381
+audio-test callbacks=9962 phase=4 eof=69 decode_errors=0 seek_errors=0
+ram phase=present frame=12300 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=215414
+state ready=next ticks=215432
+state leave=next enter=flyby ticks=216036
+state ready=flyby ticks=216051
+state leave=flyby enter=stroke ticks=217069
+state ready=stroke ticks=217081
+shot-test shoot=31 hole=4 ticks=217686
+state leave=stroke enter=roll ticks=217696
+state ready=roll ticks=217704
+audio-test callbacks=10202 phase=4 eof=71 decode_errors=0 seek_errors=0
+ram phase=present frame=12600 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=220920
+state ready=stop ticks=220931
+state leave=stop enter=next ticks=221938
+state ready=next ticks=221959
+state leave=next enter=flyby ticks=222569
+state ready=flyby ticks=222584
+state leave=flyby enter=stroke ticks=223602
+state ready=stroke ticks=223614
+shot-test shoot=32 hole=4 ticks=224236
+state leave=stroke enter=roll ticks=224247
+state ready=roll ticks=224255
+audio-test callbacks=10441 phase=4 eof=72 decode_errors=0 seek_errors=0
+ram phase=present frame=12900 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=227386
+state ready=stop ticks=227402
+state leave=stop enter=next ticks=228403
+state ready=next ticks=228423
+state leave=next enter=flyby ticks=229036
+state ready=flyby ticks=229051
+state leave=flyby enter=stroke ticks=230069
+state ready=stroke ticks=230081
+audio-test callbacks=10681 phase=4 eof=72 decode_errors=0 seek_errors=0
+ram phase=present frame=13200 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+shot-test shoot=33 hole=4 ticks=230749
+state leave=stroke enter=roll ticks=230754
+state ready=roll ticks=230762
+state leave=roll enter=stop ticks=233970
+state ready=stop ticks=233981
+state leave=stop enter=next ticks=234973
+state ready=next ticks=234994
+state leave=next enter=flyby ticks=235602
+state ready=flyby ticks=235616
+audio-test callbacks=10921 phase=4 eof=74 decode_errors=0 seek_errors=0
+ram phase=present frame=13500 page_bytes=4096 total_pages=32768 available_pages=10616 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=236636
+state ready=stroke ticks=236648
+shot-test shoot=34 hole=4 ticks=237269
+state leave=stroke enter=roll ticks=237280
+state ready=roll ticks=237288
+state leave=roll enter=stop ticks=240353
+state ready=stop ticks=240365
+audio-test callbacks=11160 phase=4 eof=75 decode_errors=0 seek_errors=0
+ram phase=present frame=13800 page_bytes=4096 total_pages=32768 available_pages=10614 min_available_pages=10590 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=241353
+state ready=next ticks=241375
+audio-test callbacks=11209 phase=4 eof=75 decode_errors=0 seek_errors=0
+ram phase=present frame=13860 page_bytes=4096 total_pages=32768 available_pages=10588 min_available_pages=10588 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=242028
+state ready=flyby ticks=242040
+state leave=flyby enter=stroke ticks=243052
+state ready=stroke ticks=243066
+shot-test shoot=35 hole=4 ticks=243669
+state leave=stroke enter=roll ticks=243680
+state ready=roll ticks=243689
+audio-test callbacks=11401 phase=4 eof=77 decode_errors=0 seek_errors=0
+ram phase=present frame=14100 page_bytes=4096 total_pages=32768 available_pages=10614 min_available_pages=10588 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=247036
+state ready=stop ticks=247051
+state leave=stop enter=next ticks=248053
+state ready=next ticks=248075
+state leave=next enter=flyby ticks=248686
+state ready=flyby ticks=248698
+state leave=flyby enter=stroke ticks=249719
+state ready=stroke ticks=249731
+shot-test shoot=36 hole=4 ticks=250353
+state leave=stroke enter=roll ticks=250361
+state ready=roll ticks=250370
+audio-test callbacks=11641 phase=4 eof=78 decode_errors=0 seek_errors=0
+ram phase=present frame=14400 page_bytes=4096 total_pages=32768 available_pages=10614 min_available_pages=10588 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=253419
+state ready=stop ticks=253433
+state leave=stop enter=score ticks=254436
+state ready=score ticks=254475
+audio-test callbacks=11833 phase=4 eof=78 decode_errors=0 seek_errors=0
+ram phase=present frame=14640 page_bytes=4096 total_pages=32768 available_pages=10569 min_available_pages=10569 virtual_committed_bytes=7430144 virtual_reserved_bytes=7430144 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+hole load=5 party=1 file=map-putt/05_ramp.sol
+state leave=score enter=next ticks=255971
+state ready=next ticks=255990
+state leave=next enter=flyby ticks=256619
+state ready=flyby ticks=256633
+audio-test callbacks=11906 phase=4 eof=78 decode_errors=0 seek_errors=0
+ram phase=present frame=14700 page_bytes=4096 total_pages=32768 available_pages=10773 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=257652
+state ready=stroke ticks=257664
+shot-test shoot=37 hole=5 ticks=258286
+state leave=stroke enter=roll ticks=258294
+state ready=roll ticks=258302
+state leave=roll enter=fall ticks=260369
+state ready=fall ticks=260396
+audio-test callbacks=12147 phase=4 eof=82 decode_errors=0 seek_errors=0
+ram phase=present frame=15000 page_bytes=4096 total_pages=32768 available_pages=10741 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=fall enter=next ticks=263388
+state ready=next ticks=263409
+state leave=next enter=flyby ticks=264019
+state ready=flyby ticks=264034
+state leave=flyby enter=stroke ticks=265052
+state ready=stroke ticks=265064
+shot-test shoot=38 hole=5 ticks=265686
+state leave=stroke enter=roll ticks=265696
+state ready=roll ticks=265705
+audio-test callbacks=12387 phase=4 eof=85 decode_errors=0 seek_errors=0
+ram phase=present frame=15300 page_bytes=4096 total_pages=32768 available_pages=10773 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=roll enter=fall ticks=268986
+state ready=fall ticks=269012
+state leave=fall enter=next ticks=272002
+state ready=next ticks=272021
+audio-test callbacks=12626 phase=4 eof=91 decode_errors=0 seek_errors=0
+ram phase=present frame=15600 page_bytes=4096 total_pages=32768 available_pages=10747 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=next enter=flyby ticks=272619
+state ready=flyby ticks=272633
+state leave=flyby enter=stroke ticks=273652
+state ready=stroke ticks=273664
+shot-test shoot=39 hole=5 ticks=274286
+state leave=stroke enter=roll ticks=274294
+state ready=roll ticks=274302
+state leave=roll enter=fall ticks=276369
+state ready=fall ticks=276395
+audio-test callbacks=12867 phase=4 eof=95 decode_errors=0 seek_errors=0
+ram phase=present frame=15900 page_bytes=4096 total_pages=32768 available_pages=10741 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+state leave=fall enter=next ticks=279388
+state ready=next ticks=279410
+state leave=next enter=flyby ticks=280019
+state ready=flyby ticks=280034
+state leave=flyby enter=stroke ticks=281052
+state ready=stroke ticks=281064
+shot-test shoot=40 hole=5 ticks=281686
+state leave=stroke enter=roll ticks=281696
+state ready=roll ticks=281705
+audio-test callbacks=13106 phase=3 eof=95 decode_errors=0 seek_errors=0
+ram phase=present frame=16200 page_bytes=4096 total_pages=32768 available_pages=10773 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=6 stack_pages=51 image_pages=618
+audio-test callbacks=13348 phase=4 eof=111 decode_errors=0 seek_errors=0
+ram phase=present frame=16500 page_bytes=4096 total_pages=32768 available_pages=10772 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=290103
+state ready=stop ticks=290115
+state leave=stop enter=next ticks=291122
+state ready=next ticks=291144
+state leave=next enter=flyby ticks=291752
+state ready=flyby ticks=291767
+audio-test callbacks=13586 phase=4 eof=112 decode_errors=0 seek_errors=0
+ram phase=present frame=16800 page_bytes=4096 total_pages=32768 available_pages=10772 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+state leave=flyby enter=stroke ticks=292786
+state ready=stroke ticks=292794
+shot-test shoot=41 hole=5 ticks=293419
+state leave=stroke enter=roll ticks=293430
+state ready=roll ticks=293438
+state leave=roll enter=stop ticks=297303
+state ready=stop ticks=297316
+audio-test callbacks=13825 phase=4 eof=118 decode_errors=0 seek_errors=0
+ram phase=present frame=17100 page_bytes=4096 total_pages=32768 available_pages=10772 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+state leave=stop enter=next ticks=298320
+state ready=next ticks=298341
+state leave=next enter=flyby ticks=298952
+state ready=flyby ticks=298964
+state leave=flyby enter=stroke ticks=299969
+state ready=stroke ticks=299983
+shot-test shoot=42 hole=5 ticks=300586
+state leave=stroke enter=roll ticks=300597
+state ready=roll ticks=300605
+audio-test callbacks=14065 phase=4 eof=122 decode_errors=0 seek_errors=0
+ram phase=present frame=17400 page_bytes=4096 total_pages=32768 available_pages=10772 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+state leave=roll enter=stop ticks=303786
+state ready=stop ticks=303801
+shot-test complete shots=42 hole=5
+system: selected action=0
+system: cleanup begin action=0
+audio-test callbacks=14142 phase=4 eof=122 decode_errors=0 seek_errors=0
+ram phase=cleanup-begin frame=17494 page_bytes=4096 total_pages=32768 available_pages=10772 min_available_pages=10569 virtual_committed_bytes=7061504 virtual_reserved_bytes=7061504 cache_pages=16 pool_pages=7 stack_pages=51 image_pages=618
+state leave=stop enter=other ticks=304598
+state ready=other ticks=304608
+audio: callbacks=14145 eof=122 decode_errors=0 seek_errors=0
+system: cleanup complete action=0
+audio-test callbacks=14145 phase=4 eof=122 decode_errors=0 seek_errors=0
+ram phase=cleanup-complete frame=17494 page_bytes=4096 total_pages=32768 available_pages=12813 min_available_pages=10569 virtual_committed_bytes=4108288 virtual_reserved_bytes=4108288 cache_pages=16 pool_pages=7 stack_pages=35 image_pages=618

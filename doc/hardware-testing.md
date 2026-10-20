@@ -779,13 +779,37 @@ were restored, and temporary course/menu fixtures and framebuffer dumps were
 removed from the separate candidate installation. The protected installation
 was untouched. KVM capture settings were not changed.
 
-Final manual navigation is pending controller reconnection: ESP's USB probe
-reported `bus=false`, `mounted=false`, and the same result after its documented
-reattach operation returned success. Title presses therefore produced no
-observed menu response; this is not recorded as a successful manual Easy 3
-check for this final normal XBE. The automated Easy 3 physics/render/audio
-cases above did complete. The normal candidate is left at the title for the
-remaining controller check.
+The subsequent manual check **failed**: the user played Neverputt and reported
+that the sound glitched and the screen froze after taking a shot. The final
+log, retrieved after reboot in `build/hardware/20261020T224951Z/`, ends at
+frame 8,400 without a cleanup record. Its lowest sampled available memory was
+9,025 pages (35.2539 MiB); this does not establish the cause or exclude an
+unsampled allocation failure. A controller was detected in stderr. The course
+and hole are not yet known. The ESP probe still reports no active USB bus, so
+remote navigation remains unavailable. This normal gameplay failure takes
+precedence over the earlier automated passes: PR #15 remains unmerged and this
+candidate must not be described as stable or validated for stock 64 MiB.
+
+A follow-up diagnostic logs Neverputt state transitions, hole filenames and
+mixer progress without logging from the mixer thread. A repeated-shot driver
+uses the stock original course and allows normal stop/fall/goal transitions
+instead of advancing after a short rolling interval. The five-minute diagnostic XBE was
+`92a633e7bd2b89baa5ca5cd0b17663788218b83cd98d4d33f6c6b62726067e4c`
+(flags `0x5`). It completed 42 shots across the first five original-course
+holes, entering normal stop, fall, goal and score states, then returned to
+XBMC. Log: `20261020T225732Z`; 17,494 rendered frames, 14,145 audio callbacks,
+122 EOFs and zero decode/seek errors. Minimum sampled free memory was 10,569
+pages (41.2852 MiB). A late 35-second HDMI capture contained 1,678,800 frames,
+RMS 0.093510. This did **not** reproduce or resolve the user's freeze.
+
+Temporary patches are [the automated shot driver](hardware-tests/putt-freeze-shot-test.patch)
+and [normal-menu diagnostics](hardware-tests/putt-freeze-normal-diagnostic.patch).
+Both apply separately to `09229d04`; they are not release code. The normal-menu
+diagnostic XBE SHA-256 is
+`0090c7eb3b9bf41141d647479c2980c36e4556f49a8c5ec9d4109e7b6f7f9e26`
+(flags `0x5`). Tracked gameplay sources were restored after building it.
+The original failure log and shot-run log are retained in
+`doc/hardware-tests/audio-results/`. Investigation is ongoing.
 
 `make test ENABLE_FETCH=0 ENABLE_NLS=0`, Xbox exit checks, shell syntax checks,
 SDK patch reverse checks, fresh pinned-source patch application/equality checks,
