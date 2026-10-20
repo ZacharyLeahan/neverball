@@ -319,3 +319,17 @@ FTP connections then repeatedly stalled during login, so the new label
 candidate has not yet been deployed or observed on hardware. A console reboot
 was requested. Earlier hardware coverage above applies to the exit actions;
 it must not be represented as hardware validation of this final XBE.
+
+After the user rebooted to XBMC, deployment/read-back verification succeeded
+(`build/hardware/20261020T143312Z/deploy.json`) for the exact label-candidate
+hash above. Live KVM captures confirmed **Exit** at the title and as the
+submenu heading, with Cancel focused in the menu and launcher confirmation.
+Selecting Cancel in confirmation returned to the menu; selecting Cancel there
+returned to the responsive title. Confirmed launcher return then reached XBMC,
+FTP recovered, and collected `system-actions.log` recorded
+`action=0 cleanup=complete target=E:\Dashboard\default.xbe`.
+Logs: `build/hardware/20261020T143428Z/`. Captures:
+`exit-label-final-title.jpg`, `exit-label-final-menu.jpg`,
+`exit-label-final-confirm.jpg`, `exit-label-final-cancel.jpg`, and
+`exit-label-final-dashboard.jpg`. This resolves the final-label deployment
+blocker. The console was left in XBMC. Actual power-off remains untested.
